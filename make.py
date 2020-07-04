@@ -89,7 +89,7 @@ theme = theme_template.format(theme)
 code_theme = code_theme_template.format(code_theme)
 
 # Extract zip
-shutil.rmtree(revealjs_dir)
+shutil.rmtree(revealjs_dir, ignore_errors=True)
 with ZipFile(revealjs_zip) as revealjs:
     revealjs.extractall(path=revealjs_dir)
 
