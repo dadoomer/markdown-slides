@@ -1,34 +1,38 @@
-% This is a comment. It will not be included in the presentation.
-%
-% Set the theme:
-% THEME = white
-% CODE_THEME = zenburn
-%
-% You can pass options to reveal.js like below:
-% controls: false
-% keyboard: true
-% markdown: { smartypants: true }
-% hash: false
-%
-% Compile the presentation with --include media
+[comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
+[comment]: # (Compile this presentation with --include media)
+
+[comment]: # (Set the theme:)
+[comment]: # (THEME = white)
+[comment]: # (CODE_THEME = zenburn)
+
+[comment]: # (Pass optional settings to reveal.js:)
+[comment]: # (controls: false)
+[comment]: # (keyboard: true)
+[comment]: # (markdown: { smartypants: true })
+[comment]: # (hash: false)
 
 John Doe | College University | July 3, 2020
 
 # Great Title
 
-% Three or more !!! mark a slide break.
-!!!
+[comment]: # (A comment starting with three or more !!! marks a slide break.)
+[comment]: # (!!!)
 
-## Great advances
+Use markdown to harness the power of Reveal.js.
 
-- Progress is being made
-- A nice equation was proposed
+[comment]: # (!!!)
+
+## Lists and math
+
+- Using markdown to write presentations
+- Easy lists
+- LaTeX math syntax
 
 `$$ J(\theta_0,\theta_1) = \sum_{i=0} $$`
 
-!!!
+[comment]: # (!!!)
 
-Code has insights we must explain:
+Code syntax highlighting and animations:
 
 ```js [1-2|3|4]
 let a = 1;
@@ -37,45 +41,38 @@ let c = x => 1 + 2 + x;
 c(3);
 ```
 
-% section attributes for the just-ending slide can be specified:
-!!! data-background-color="aquamarine"
+Notice the background color change.
 
+[comment]: # (section attributes for the just-ending slide can be specified:)
+[comment]: # (!!! data-background-color="aquamarine")
 
-We are justifying the background video, as it is an important feature
-of **our** work, and *we can even write more*.
+Use background videos and **text formatting**,
+everything *without breaking* your markdown files.
 
-!!! data-background-video="media/video.mp4", data-background-video-loop data-background-video-muted data-background-opacity="0.2"
+[comment]: # (!!! data-background-video="media/video.mp4", data-background-video-loop data-background-video-muted data-background-opacity="0.2")
 
-## Results
+## Pictures
 
-![picture of spaghetti](media/image0.gif) <!-- .element: style="height:50vw; image-rendering: crisp-edges;" -->
+![picture of spaghetti](media/image0.gif) <!-- .element: style="height:30vw; image-rendering: crisp-edges;" -->
 
-The image caption.
+Showcase media including images, videos and animations.
 
-!!!
+[comment]: # (!!!)
 
-More details will be in the paper, but we can still write a little bit of text here.
+## Animations
 
-Just be sure to not bore your audience too much, as this is just an example
-presentation without any real content. The goal is to show how it is displayed,
-even though its source code is easy to read.
+- This is an example list
+- Just to showcase Reveal.js' animations
 
-!!!
+[comment]: # (!!! data-auto-animate)
 
-## Conclusions
+## Animations
 
-- We found interesting things
-- It is possible to find things
+- This is an example list
+- Just to showcase Reveal.js' animations
+- This item will be automatically faded-in
 
-!!! data-auto-animate
-
-## Conclusions
-
-- We found interesting things
-- It is possible to find things
-- We discovered stuff
-
-!!! data-auto-animate
+[comment]: # (!!! data-auto-animate)
 
 ```js [1-2|3|4]
 let a = 1;
@@ -85,7 +82,7 @@ c(3);
 ```
 <!-- .element: data-id="code" -->
 
-!!! data-auto-animate
+[comment]: # (!!! data-auto-animate)
 
 ```js [5]
 let a = 1;
@@ -96,6 +93,6 @@ c(5);
 ```
 <!-- .element: data-id="code" -->
 
-We changed the code <!-- .element: class="fragment" data-fragment-index="1" -->
+Animate code as well <!-- .element: class="fragment" data-fragment-index="1" -->
 
-!!! data-auto-animate
+[comment]: # (!!! data-auto-animate)

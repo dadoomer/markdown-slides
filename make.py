@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 from zipfile import ZipFile
 import shutil
+import re
 
 parser = argparse.ArgumentParser(description='Convert a markdown file to a reveal.js presentation.')
 parser.add_argument('FILE', type=str, help="Markdown file.")
@@ -21,6 +22,15 @@ section_template = "<section data-markdown {}><textarea data-template>\n{}\n</te
 theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
 code_theme_template = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
 
+option_re = r"\[comment\]: # \([ ]*(\w+)[ ]*:[ ]*(\w+)[ ]*\)"
+option_re = re.compile(option_re)
+delimiter_re = r"\[comment\]: # \(\!\!\![ ]*(.*)\)"
+delimiter_re = re.compile(delimiter_re)
+theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\w+)[ ]*\)"
+theme_re = re.compile(theme_re)
+code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\w+)[ ]*\)"
+code_theme_re = re.compile(code_theme_re)
+
 revealjs_zip = Path("./reveal.js.zip")
 revealjs_dir = Path("./reveal.js")
 index_file_original = revealjs_dir / "index.html"
@@ -37,63 +47,38 @@ default_code_theme = "monokai"
 with open(markdown_file) as f: presentation_markdown = list(f)
 
 # Build presentation
-def de_comment(l):
-    i = 0
-    while i < len(l) and l[i] == comment_char: i+=1
-    return l[i:]
-
-def de_delimitate(l):
-    i = 0
-    while i < len(l) and l[i] == slide_delimitator[0]: i+=1
-    return l[i:]
-
-def get_value(l):
-    return l.split("=")[-1]
-
-def is_delimitator(l):
-    return len(l) >= 3 and l[:3] == slide_delimitator
-
-def is_comment(l):
-    return len(l) > 0 and l[0] == comment_char
-
-def is_option(l):
-    l = l.strip()
-    return is_comment(l) and "" not in set(l.split(":")) and len(l.split(":")) >= 2
-
-def is_theme(l):
-    return "THEME" in l
-
-def is_code_theme(l):
-    return "CODE_THEME" in l
-
 presentation = list()
 slide = list()
 options = list()
 theme = default_theme
 code_theme = default_code_theme
 for l in presentation_markdown:
-    if is_code_theme(l):
-        code_theme = get_value(l).strip()
+    l = l.strip()
+
+    m = option_re.match(l)
+    if m is not None:
+        options.append("{} : {},".format(m.group(1), m.group(2)))
         continue
 
-    if is_theme(l):
-        theme = get_value(l).strip()
-        continue
-
-    if is_option(l):
-        options.append(de_comment(l).strip()+",")
-        continue
-
-    if is_comment(l):
-        continue
-
-    if is_delimitator(l):
-        attributes = " ".join(de_delimitate(l).strip().split(","))
-        presentation.append(section_template.format(attributes, "".join(slide)))
+    m = delimiter_re.match(l)
+    if m is not None:
+        attributes = default_attributes + " " + m.group(1)
+        presentation.append(section_template.format(attributes, "\n".join(slide)))
         slide = list()
         continue
 
+    m = theme_re.match(l)
+    if m is not None:
+        theme = m.group(1)
+        continue
+
+    m = code_theme_re.match(l)
+    if m is not None:
+        code_theme = m.group(1)
+        continue
+
     slide.append(l)
+
 if len(slide) > 0:
     presentation.append(section_template.format(attributes, "".join(slide)))
 
@@ -104,6 +89,7 @@ theme = theme_template.format(theme)
 code_theme = code_theme_template.format(code_theme)
 
 # Extract zip
+shutil.rmtree(revealjs_dir)
 with ZipFile(revealjs_zip) as revealjs:
     revealjs.extractall(path=revealjs_dir)
 

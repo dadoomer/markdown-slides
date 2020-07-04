@@ -4,16 +4,41 @@ Reveal.js files, completely avoiding the need to edit HTML files directly.
 
 # Usage:
 
-Markdown as usual, except:
+You will not have to break your markdown files to use this program: metadata
+is read from CommonMark compliant comment lines:
 
-- Use `!!!` to mark slide breaks.
-- Comments are marked with `%`.
-- Options for Reveal.js are defined with `% option: value`.
-- The theme and code themes are specified like so: `% THEME = white`, `% CODE_THEME = zenburn`.
+```md
+[comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
 
-Everything else is passed to Reveal.js verbatim so check out their documentation,
-specially the [markdown section](https://revealjs.com/markdown/). Check the
-accompanying `presentation.md` for a quick introduction.
+# A nice title
+
+Normal *markdown* stuff. Using this program is as simple as inserting slide
+breaks. Below is a slide break.
+
+[comment:] (!!!)
+
+Continue writing markdown as usual, maybe even some nice equations:
+
+`$$f(x) = 2^x$$`
+```
+
+You can also control Reveal.js options using comments:
+
+```md
+[comment]: # (Set the theme:)
+[comment]: # (THEME = white)
+[comment]: # (CODE_THEME = white)
+
+[comment]: # (Pass optional settings to reveal.js:)
+[comment]: # (controls: false)
+[comment]: # (keyboard: true)
+[comment]: # (markdown: { smartypants: true })
+[comment]: # (hash: false)
+```
+
+Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown
+section](https://revealjs.com/markdown/). Review the accompanying
+`presentation.md` for a quick introduction.
 
 # Features
 
