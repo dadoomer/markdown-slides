@@ -2,6 +2,15 @@ Write presentations using markdown and export them to a portable HTML format
 with Reveal.js. This program appropriately inserts markdown files into
 Reveal.js files, completely avoiding the need to edit HTML files directly.
 
+# Why:
+
+ - Markdown is simple and portable. You can write markdown in a cellphone or
+ in a remote server.
+ - You want to write equations in LaTeX.
+ - PDFs have no support for videos, but HTML does.
+ - PowerPoint and LibreOffice are not available in all computers, but virtually
+ every computer has a web browser.
+
 # Usage:
 
 You will not have to break your markdown files to use this program: metadata
