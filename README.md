@@ -12,5 +12,5 @@ I.e.
 ```
 git clone https://gitlab.com/da_doomer/markdown-revealjs-presentation.git
 cd markdown-revealjs-presentation
-python make.py --include media
+python make.py presentation.md --include media
 ```
