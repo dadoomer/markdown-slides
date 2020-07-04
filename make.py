@@ -26,7 +26,7 @@ revealjs_dir = Path("./reveal.js")
 index_file_original = revealjs_dir / "index.html"
 index_file_new = revealjs_dir / "index.html"
 
-slide_delimitator = "~~~"
+slide_delimitator = "!!!"
 comment_char = "%"
 
 default_attributes = ""
@@ -49,6 +49,9 @@ def de_delimitate(l):
 
 def get_value(l):
     return l.split("=")[-1]
+
+def is_delimitator(l):
+    return len(l) >= 3 and l[:3] == slide_delimitator
 
 def is_comment(l):
     return len(l) > 0 and l[0] == comment_char
@@ -84,7 +87,7 @@ for l in presentation_markdown:
     if is_comment(l):
         continue
 
-    if slide_delimitator in l:
+    if is_delimitator(l):
         attributes = " ".join(de_delimitate(l).strip().split(","))
         presentation.append(section_template.format(attributes, "".join(slide)))
         slide = list()
