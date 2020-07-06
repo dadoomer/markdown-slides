@@ -24,7 +24,7 @@ is read from CommonMark compliant comment lines:
 Normal *markdown* stuff. Using this program is as simple as inserting slide
 breaks. Below is a slide break.
 
-[comment:] (!!!)
+[comment]: (!!!)
 
 Continue writing markdown as usual, maybe even some nice equations:
 
