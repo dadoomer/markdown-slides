@@ -53,7 +53,8 @@ options = list()
 theme = default_theme
 code_theme = default_code_theme
 for l in presentation_markdown:
-    l = l.strip()
+    #l = l.strip()
+    l = l[:-1]
 
     m = option_re.match(l)
     if m is not None:
