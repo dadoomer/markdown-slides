@@ -1,59 +1,7 @@
-Write presentations using markdown and export them to a portable HTML format
-with Reveal.js. This program appropriately inserts markdown files into
+**Using markdown, write simple but beautiful presentations with math, animations and media.**
+
+This program appropriately inserts markdown files into
 Reveal.js files, completely avoiding the need to edit HTML files directly.
-
-# Why:
-
- - Markdown is simple and portable. You can write markdown in a cellphone or
- in a remote server.
- - You want to write equations in LaTeX.
- - PDFs have no support for videos, but HTML does.
- - PowerPoint and LibreOffice are not available in all computers, but virtually
- every computer has a web browser.
-
-# Usage
-
-```
-$python make.py [-h] [--include RESOURCE] [--pdf] FILE
-```
-
-# Syntax:
-
-You will not have to break your markdown files to use this program: metadata
-is read from CommonMark compliant comment lines:
-
-```md
-[comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
-
-# A nice title
-
-Normal *markdown* stuff. Using this program is as simple as inserting slide
-breaks. Below is a slide break.
-
-[comment]: (!!!)
-
-Continue writing markdown as usual, maybe even some nice equations:
-
-`$$f(x) = 2^x$$`
-```
-
-You can also control Reveal.js options using comments:
-
-```md
-[comment]: # (Set the theme:)
-[comment]: # (THEME = white)
-[comment]: # (CODE_THEME = white)
-
-[comment]: # (Pass optional settings to reveal.js:)
-[comment]: # (controls: false)
-[comment]: # (keyboard: true)
-[comment]: # (markdown: { smartypants: true })
-[comment]: # (hash: false)
-```
-
-Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown
-section](https://revealjs.com/markdown/). Review the accompanying
-`presentation.md` for a quick introduction.
 
 # Features
 
@@ -80,3 +28,62 @@ git clone https://gitlab.com/da_doomer/markdown-revealjs-presentation.git
 cd markdown-revealjs-presentation
 python make.py presentation.md --include media
 ```
+
+# Why:
+
+ - Markdown is simple and portable. You can write markdown in a cellphone or
+ in a remote server.
+ - You want to write equations in LaTeX.
+ - PDFs have no support for videos, but HTML does.
+ - PowerPoint and LibreOffice are not available in all computers, but virtually
+ every computer has a web browser.
+
+# Usage
+
+```
+$python make.py [-h] [--include RESOURCE] [--pdf] FILE
+```
+
+# Syntax:
+
+Review the accompanying `presentation.md` for a quick introduction. A short example presentation is below.
+
+```md
+[comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
+
+# A nice title
+
+Normal *markdown* stuff. Using this program is as simple as inserting slide
+breaks. Below is a slide break.
+
+[comment]: (!!!)
+
+Continue writing markdown as usual, maybe even some nice equations:
+
+`$$f(x) = 2^x$$`
+
+[comment]: (!!!)
+```
+
+
+You will not have to break your markdown files to use this program: control Reveal.js' theme and options using CommonMark-compliant comments.
+
+```md
+[comment]: # (Set the theme:)
+[comment]: # (THEME = white)
+[comment]: # (CODE_THEME = white)
+
+[comment]: # (Pass optional settings to reveal.js:)
+[comment]: # (controls: false)
+[comment]: # (keyboard: true)
+[comment]: # (markdown: { smartypants: true })
+[comment]: # (hash: false)
+```
+
+Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown
+section](https://revealjs.com/markdown/).
+
+
+# PDF export
+
+Open the presentation appending `?print-pdf` to the URL, then print to PDF using your browser's print option, enabling background graphics. This appears to work best on Chromium.
