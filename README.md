@@ -1,7 +1,16 @@
-**Using markdown, write simple but beautiful presentations with math, animations and media.**
+**Using markdown, write simple but beautiful presentations with math,
+animations and media, which can be visualized in a web browser even without
+an internet connection.**
 
-This program appropriately inserts markdown files into
-Reveal.js files, completely avoiding the need to edit HTML files directly.
+This program appropriately inserts markdown files into Reveal.js files,
+completely avoiding the need to edit HTML files directly.
+
+# Usage
+
+```
+$ python make.py [-h] [--include RESOURCE] [--pdf] FILE
+```
+
 
 # Features
 
@@ -37,12 +46,6 @@ python make.py presentation.md --include media
  - PDFs have no support for videos, but HTML does.
  - PowerPoint and LibreOffice are not available in all computers, but virtually
  every computer has a web browser.
-
-# Usage
-
-```
-$python make.py [-h] [--include RESOURCE] [--pdf] FILE
-```
 
 # Syntax:
 
@@ -84,6 +87,3 @@ Everything but slide-break comments and option comments is passed to Reveal.js v
 section](https://revealjs.com/markdown/).
 
 
-# PDF export
-
-Open the presentation appending `?print-pdf` to the URL, then print to PDF using your browser's print option, enabling background graphics. This appears to work best on Chromium.
