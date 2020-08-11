@@ -11,7 +11,13 @@ Reveal.js files, completely avoiding the need to edit HTML files directly.
  - PowerPoint and LibreOffice are not available in all computers, but virtually
  every computer has a web browser.
 
-# Usage:
+# Usage
+
+```
+$python make.py [-h] [--include RESOURCE] [--pdf] FILE
+```
+
+# Syntax:
 
 You will not have to break your markdown files to use this program: metadata
 is read from CommonMark compliant comment lines:

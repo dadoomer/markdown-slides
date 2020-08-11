@@ -3,14 +3,28 @@ from pathlib import Path
 import argparse
 from zipfile import ZipFile
 import shutil
+import subprocess
 import re
 
 parser = argparse.ArgumentParser(description='Convert a markdown file to a reveal.js presentation.')
 parser.add_argument('FILE', type=str, help="Markdown file.")
 parser.add_argument('--include', metavar="RESOURCE", help="Directory or file to include. This option can be used multiple times.", default=[], action="append")
+parser.add_argument('--pdf', help="Export a pdf file (requires chromium installed).", action="store_true")
 args = parser.parse_args()
 
+# TODO: export to pdf, change name of output folder
+
 markdown_file = Path(args.FILE)
+export_to_pdf = args.pdf
+
+def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
+    command = [
+        'chromium',
+        '--headless',
+        '--print-to-pdf={}'.format(output_pdf_path),
+        index_html_path.resolve().as_uri()+'?print-pdf',
+    ]
+    subprocess.run(command)
 
 magic_word = "DATA"
 options_word = "Reveal.initialize({"
@@ -116,3 +130,18 @@ for path in [Path(p) for p in args.include]:
         shutil.copytree(path, revealjs_dir/path.parts[-1])
     else:
         shutil.copy(path, revealjs_dir/path.parts[-1])
+
+# Export to PDF if needed
+if export_to_pdf:
+    try:
+        pdf_chromium_export(index_file_new, markdown_file.with_suffix('.pdf'))
+
+    except Exception as e:
+        print("Chromium exporting failed")
+        print(e)
+        print("Make sure chromium is installed and in your path")
+
+# Change output folder name
+revealjs_new_dir = markdown_file.parent/markdown_file.with_suffix('')
+shutil.rmtree(revealjs_new_dir, ignore_errors=True)
+revealjs_dir.rename(revealjs_new_dir)
