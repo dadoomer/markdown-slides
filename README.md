@@ -33,8 +33,8 @@ include files or folders with media.
 For example, to compile the example presentation:
 
 ```
-git clone https://gitlab.com/da_doomer/markdown-revealjs-presentation.git
-cd markdown-revealjs-presentation
+git clone https://gitlab.com/da_doomer/markdown-slides.git
+cd markdown-slides
 python make.py presentation.md --include media
 ```
 
