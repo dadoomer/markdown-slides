@@ -11,6 +11,10 @@ completely avoiding the need to edit HTML files directly.
 $ python make.py [-h] [--include RESOURCE] [--pdf] FILE
 ```
 
+Notes:
+
+ - PDF exporting requires chromium (see [PDF exporting on
+	 reveal-js](https://revealjs.com/pdf-export/).
 
 # Features
 
