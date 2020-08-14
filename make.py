@@ -135,6 +135,7 @@ for path in [Path(p) for p in args.include]:
 if export_to_pdf:
     try:
         pdf_chromium_export(index_file_new, markdown_file.with_suffix('.pdf'))
+        print("Wrote {}".format(markdown_file.with_suffix('.pdf')))
 
     except Exception as e:
         print("Chromium exporting failed")
@@ -145,3 +146,4 @@ if export_to_pdf:
 revealjs_new_dir = markdown_file.parent/markdown_file.with_suffix('')
 shutil.rmtree(revealjs_new_dir, ignore_errors=True)
 revealjs_dir.rename(revealjs_new_dir)
+print("Done. Open {} with your web browser".format(revealjs_new_dir/"index.html"))
