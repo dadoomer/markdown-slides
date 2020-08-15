@@ -8,13 +8,13 @@ completely avoiding the need to edit HTML files directly.
 # Usage
 
 ```
-$ python make.py [-h] [--include RESOURCE] [--pdf] FILE
+python make.py [-h] [--include RESOURCE] [--pdf] FILE
 ```
 
 Notes:
 
  - PDF exporting requires chromium (see [PDF exporting on
-	 reveal-js](https://revealjs.com/pdf-export/).
+	 reveal-js](https://revealjs.com/pdf-export/)).
 
 # Features
 
@@ -53,7 +53,7 @@ python make.py presentation.md --include media
 
 # Syntax:
 
-Review the accompanying `presentation.md` for a quick introduction. A short example presentation is below.
+Review the accompanying [`presentation.md`](./presentation.md) for a quick introduction. If you need a quick refresher on markdown see the [CommonMark reference page](https://commonmark.org/help/). A short example presentation is below.
 
 ```md
 [comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
