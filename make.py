@@ -16,6 +16,7 @@ args = parser.parse_args()
 
 markdown_file = Path(args.FILE)
 export_to_pdf = args.pdf
+export_to_html = not export_to_pdf
 
 def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
     command = [
@@ -66,6 +67,7 @@ slide = list()
 options = list()
 theme = default_theme
 code_theme = default_code_theme
+attributes = default_attributes
 for l in presentation_markdown:
     #l = l.strip()
     l = l[:-1]
@@ -142,8 +144,12 @@ if export_to_pdf:
         print(e)
         print("Make sure chromium is installed and in your path")
 
-# Change output folder name
-revealjs_new_dir = markdown_file.parent/markdown_file.with_suffix('')
-shutil.rmtree(revealjs_new_dir, ignore_errors=True)
-revealjs_dir.rename(revealjs_new_dir)
-print("Done. Open {} with your web browser".format(revealjs_new_dir/"index.html"))
+if export_to_html:
+    # Change output folder name
+    revealjs_new_dir = markdown_file.parent/markdown_file.with_suffix('')
+    shutil.rmtree(revealjs_new_dir, ignore_errors=True)
+    revealjs_dir.rename(revealjs_new_dir)
+    print("Done. Open {} with your web browser".format(revealjs_new_dir/"index.html"))
+
+if not export_to_html:
+    shutil.rmtree(revealjs_dir, ignore_errors=True)
