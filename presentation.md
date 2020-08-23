@@ -1,3 +1,4 @@
+[comment]: # (This presentation was made with markdown-slides)
 [comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
 [comment]: # (Compile this presentation with --include media)
 
@@ -9,13 +10,17 @@
 [comment]: # (controls: false)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
-[comment]: # (hash: false)
+[comment]: # (hash: true)
 
 John Doe | College University | July 3, 2020
 
 # Great Title
 
 [comment]: # (A comment starting with three or more !!! marks a slide break.)
+[comment]: # (!!!)
+
+This presentation was made with [markdown-slides](https://gitlab.com/da_doomer/markdown-slides).
+
 [comment]: # (!!!)
 
 Use markdown to harness the power of Reveal.js.
