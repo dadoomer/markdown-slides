@@ -2,8 +2,20 @@
 animations and media, which can be visualized in a web browser even without
 an internet connection.**
 
+See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
+
 This program appropriately inserts markdown files into Reveal.js files,
 completely avoiding the need to edit HTML files directly.
+
+# Quick start
+
+For example, to compile the example presentation:
+
+```
+git clone https://gitlab.com/da_doomer/markdown-slides.git
+cd markdown-slides
+python make.py presentation.md --include media
+```
 
 # Usage
 
@@ -27,21 +39,6 @@ Some of Reveal.js's features are:
 MathJax is bundled in this repository, so web browsers do not need internet
 connection to display the presentations.
 
-# Instructions
-
-1. Clone the repository.
-2. Run the program with your own markdown file. You can use `--include F` to
-include files or folders with media.
-3. Open `reveal.js/index.html` in a web browser.
-
-For example, to compile the example presentation:
-
-```
-git clone https://gitlab.com/da_doomer/markdown-slides.git
-cd markdown-slides
-python make.py presentation.md --include media
-```
-
 # Why:
 
  - Markdown is simple and portable. You can write markdown in a cellphone or
@@ -53,27 +50,14 @@ python make.py presentation.md --include media
 
 # Syntax:
 
-Review the accompanying [`presentation.md`](./presentation.md) for a quick introduction. If you need a quick refresher on markdown see the [CommonMark reference page](https://commonmark.org/help/). A short example presentation is below.
+For a quick start see the example [`presentation.md`](./presentation.md).
+If you need a quick refresher on markdown see e.g.
+[this cheatsheet](https://www.markdownguide.org/cheat-sheet/), the
+[CommonMark reference page](https://commonmark.org/help/), or this
+[Gfm tutorial](https://guides.github.com/features/mastering-markdown/).
 
-```md
-[comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
-
-# A nice title
-
-Normal *markdown* stuff. Using this program is as simple as inserting slide
-breaks. Below is a slide break.
-
-[comment]: (!!!)
-
-Continue writing markdown as usual, maybe even some nice equations:
-
-`$$f(x) = 2^x$$`
-
-[comment]: (!!!)
-```
-
-
-You will not have to break your markdown files to use this program: control Reveal.js' theme and options using CommonMark-compliant comments.
+You will not have to break your markdown files to use this program. Control
+Reveal.js' theme and options using CommonMark-compliant comments:
 
 ```md
 [comment]: # (Set the theme:)
@@ -84,10 +68,7 @@ You will not have to break your markdown files to use this program: control Reve
 [comment]: # (controls: false)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
-[comment]: # (hash: false)
+[comment]: # (hash: true)
 ```
 
-Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown
-section](https://revealjs.com/markdown/).
-
-
+Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown section](https://revealjs.com/markdown/).
