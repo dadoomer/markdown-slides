@@ -10,7 +10,8 @@
 [comment]: # (controls: false)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
-[comment]: # (hash: true)
+[comment]: # (hash: false)
+[comment]: # (respondToHashChanges: false)
 
 John Doe | College University | July 3, 2020
 
