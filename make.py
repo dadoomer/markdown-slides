@@ -11,12 +11,20 @@ parser.add_argument('FILE', type=str, help="Markdown file.")
 parser.add_argument('--include', metavar="RESOURCE", help="Directory or file to include. This option can be used multiple times.", default=[], action="append")
 parser.add_argument('--pdf', help="Export a pdf file (requires chromium installed).", action="store_true")
 args = parser.parse_args()
+export_to_pdf = args.pdf
+export_to_html = not export_to_pdf
 
 # TODO: export to pdf, change name of output folder
 
-markdown_file = Path(args.FILE)
-export_to_pdf = args.pdf
-export_to_html = not export_to_pdf
+import pathlib
+resource_path = pathlib.Path(__file__).parent.absolute()
+target_path = pathlib.Path().absolute()
+
+revealjs_zip = resource_path/Path("./reveal.js.zip")
+markdown_file = target_path/Path(args.FILE)
+revealjs_dir = target_path/Path("./reveal.js")
+index_file_original = target_path/revealjs_dir / "index.html"
+index_file_new = target_path/revealjs_dir / "index.html"
 
 def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
     command = [
@@ -45,11 +53,6 @@ theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\w+)[ ]*\)"
 theme_re = re.compile(theme_re)
 code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\w+)[ ]*\)"
 code_theme_re = re.compile(code_theme_re)
-
-revealjs_zip = Path("./reveal.js.zip")
-revealjs_dir = Path("./reveal.js")
-index_file_original = revealjs_dir / "index.html"
-index_file_new = revealjs_dir / "index.html"
 
 slide_delimitator = "!!!"
 comment_char = "%"
