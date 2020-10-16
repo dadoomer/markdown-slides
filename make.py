@@ -58,8 +58,12 @@ slide_delimitator = "!!!"
 comment_char = "%"
 
 default_attributes = ""
-default_theme = "black"
-default_code_theme = "monokai"
+default_theme = "white"
+default_code_theme = "zenburn"
+default_options = {
+        "controls" : "false",
+        "markdown" : "{smartypants: true}",
+    }
 
 # Open markdown file
 with open(markdown_file) as f: presentation_markdown = list(f)
@@ -67,7 +71,7 @@ with open(markdown_file) as f: presentation_markdown = list(f)
 # Build presentation
 presentation = list()
 slide = list()
-options = list()
+options = ["{} : {},".format(key, val) for key, val in default_options.items()]
 theme = default_theme
 code_theme = default_code_theme
 attributes = default_attributes
