@@ -154,6 +154,3 @@ if export_to_pdf:
 if export_to_html:
     # Change output folder name
     print("Done. Open {} with your web browser".format(revealjs_dir/"index.html"))
-
-if not export_to_html:
-    shutil.rmtree(revealjs_dir, ignore_errors=True)
