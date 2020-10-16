@@ -22,8 +22,8 @@ target_path = pathlib.Path().absolute()
 
 revealjs_zip = resource_path/Path("./reveal.js.zip")
 markdown_file = target_path/Path(args.FILE)
-revealjs_dir = target_path/Path("./reveal.js")
-index_file_original = target_path/revealjs_dir / "index.html"
+revealjs_dir = markdown_file.parent/markdown_file.with_suffix('')
+index_file_original = target_path/revealjs_dir / "index_template.html"
 index_file_new = target_path/revealjs_dir / "index.html"
 
 def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
@@ -113,9 +113,9 @@ theme = theme_template.format(theme)
 code_theme = code_theme_template.format(code_theme)
 
 # Extract zip
-shutil.rmtree(revealjs_dir, ignore_errors=True)
-with ZipFile(revealjs_zip) as revealjs:
-    revealjs.extractall(path=revealjs_dir)
+if not revealjs_dir.exists():
+    with ZipFile(revealjs_zip) as revealjs:
+        revealjs.extractall(path=revealjs_dir)
 
 # Read html
 with open(index_file_original, "r") as f:
@@ -136,9 +136,9 @@ with open(index_file_new, "w") as f:
 # Copy include files
 for path in [Path(p) for p in args.include]:
     if path.is_dir:
-        shutil.copytree(path, revealjs_dir/path.parts[-1])
+        shutil.copytree(path, revealjs_dir/path.parts[-1], dirs_exist_ok=True)
     else:
-        shutil.copy(path, revealjs_dir/path.parts[-1])
+        shutil.copy(path, revealjs_dir/path.parts[-1], exist_ok=True)
 
 # Export to PDF if needed
 if export_to_pdf:
@@ -153,10 +153,7 @@ if export_to_pdf:
 
 if export_to_html:
     # Change output folder name
-    revealjs_new_dir = markdown_file.parent/markdown_file.with_suffix('')
-    shutil.rmtree(revealjs_new_dir, ignore_errors=True)
-    revealjs_dir.rename(revealjs_new_dir)
-    print("Done. Open {} with your web browser".format(revealjs_new_dir/"index.html"))
+    print("Done. Open {} with your web browser".format(revealjs_dir/"index.html"))
 
 if not export_to_html:
     shutil.rmtree(revealjs_dir, ignore_errors=True)
