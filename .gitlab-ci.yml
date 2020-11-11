@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - python make.py presentation.md --include media
-    - mv presentation ../public
+    - mv presentation public
   artifacts:
     paths:
       - public
