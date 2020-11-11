@@ -1,10 +1,8 @@
-image: alpine:latest
+image: python:3.7-alpine
 
 pages:
   stage: deploy
   script:
-    - git clone https://gitlab.com/da_doomer/markdown-slides.git
-    - cd markdown-slides
     - python make.py presentation.md --include media
     - mv presentation ../public
   artifacts:
