@@ -79,11 +79,13 @@ for l in presentation_markdown:
     #l = l.strip()
     l = l[:-1]
 
+    # Is the line setting an option?
     m = option_re.match(l)
     if m is not None:
         options.append("{} : {},".format(m.group(1), m.group(2)))
         continue
 
+    # Is the line a slide break?
     m = delimiter_re.match(l)
     if m is not None:
         attributes = default_attributes + " " + m.group(1)
@@ -91,20 +93,24 @@ for l in presentation_markdown:
         slide = list()
         continue
 
+    # Is the line setting a theme?
     m = theme_re.match(l)
     if m is not None:
         theme = m.group(1)
         continue
 
+    # Is the line setting a code theme?
     m = code_theme_re.match(l)
     if m is not None:
         code_theme = m.group(1)
         continue
 
+    # Else, we assume the line is markdown
     slide.append(l)
 
+# Did the user forget to insert the final slide break?
 if len(slide) > 0:
-    presentation.append(section_template.format(attributes, "".join(slide)))
+    presentation.append(section_template.format(default_attributes, "\n".join(slide)))
 
 # Replacement strings
 presentation = "\n".join(presentation + [""])
