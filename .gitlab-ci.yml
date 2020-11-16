@@ -1,0 +1,12 @@
+image: python:3.8-alpine
+
+pages:
+  stage: deploy
+  script:
+    - python make.py presentation.md --include media
+    - mv presentation public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

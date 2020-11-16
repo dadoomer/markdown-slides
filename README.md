@@ -2,6 +2,8 @@
 animations and media, which can be visualized in a web browser even without
 an internet connection.**
 
+**See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides). For a quick start see the example [`presentation.md`](./presentation.md).
+
 See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
 
 This program appropriately inserts markdown files into Reveal.js files,
@@ -50,7 +52,6 @@ connection to display the presentations.
 
 # Syntax:
 
-For a quick start see the example [`presentation.md`](./presentation.md).
 If you need a quick refresher on markdown see e.g.
 [this cheatsheet](https://www.markdownguide.org/cheat-sheet/), the
 [CommonMark reference page](https://commonmark.org/help/), or this
@@ -69,6 +70,9 @@ Reveal.js' theme and options using CommonMark-compliant comments:
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
 [comment]: # (hash: true)
+
+[comment]: # (Comments starting with three or more exclamation signs mark slide-breaks)
+[comment]: # (!!!)
 ```
 
 Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown section](https://revealjs.com/markdown/).
