@@ -20,7 +20,7 @@ import pathlib
 resource_path = pathlib.Path(__file__).parent.absolute()
 target_path = pathlib.Path().absolute()
 
-revealjs_zip = resource_path/Path("./reveal.js.zip")
+revealjs_origin = resource_path/Path("./reveal.js")
 markdown_file = target_path/Path(args.FILE)
 revealjs_dir = markdown_file.parent/markdown_file.with_suffix('')
 index_file_original = target_path/revealjs_dir / "index_template.html"
@@ -36,10 +36,12 @@ def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
     subprocess.run(command)
 
 magic_word = "DATA"
+title_word = "TITLE"
 options_word = "Reveal.initialize({"
 theme_word = '<link rel="stylesheet" href="dist/theme'
 code_theme_word = '<link rel="stylesheet" href="plugin/highlight'
 
+title_template = "<title>{}</title>"
 section_template = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
 #section_template = "<section data-markdown {}>\n{}\n</section>"
 theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
@@ -113,6 +115,8 @@ if len(slide) > 0:
     presentation.append(section_template.format(default_attributes, "\n".join(slide)))
 
 # Replacement strings
+title = "Slides"
+title = title_template.format(title)
 presentation = "\n".join(presentation + [""])
 options = "\n".join([options_word] + options + [""])
 theme = theme_template.format(theme)
@@ -120,13 +124,14 @@ code_theme = code_theme_template.format(code_theme)
 
 # Extract zip
 if not revealjs_dir.exists():
-    with ZipFile(revealjs_zip) as revealjs:
-        revealjs.extractall(path=revealjs_dir)
+    shutil.copytree(revealjs_origin, revealjs_dir)
 
 # Read html
 with open(index_file_original, "r") as f:
     index_html = list(f)
 
+# Replace title
+index_html = [l if title_word not in l else title for l in index_html]
 # Replace theme
 index_html = [l if theme_word not in l else theme for l in index_html]
 # Replace code theme
