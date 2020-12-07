@@ -55,6 +55,8 @@ theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\w+)[ ]*\)"
 theme_re = re.compile(theme_re)
 code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\w+)[ ]*\)"
 code_theme_re = re.compile(code_theme_re)
+title_re = r"#[#]*[ ]*(.*)"
+title_re = re.compile(title_re)
 
 slide_delimitator = "!!!"
 comment_char = "%"
@@ -70,6 +72,7 @@ default_options = {
 # Open markdown file
 with open(markdown_file) as f: presentation_markdown = list(f)
 
+
 # Build presentation
 presentation = list()
 slide = list()
@@ -77,6 +80,7 @@ options = ["{} : {},".format(key, val) for key, val in default_options.items()]
 theme = default_theme
 code_theme = default_code_theme
 attributes = default_attributes
+title = None
 for l in presentation_markdown:
     #l = l.strip()
     l = l[:-1]
@@ -107,6 +111,13 @@ for l in presentation_markdown:
         code_theme = m.group(1)
         continue
 
+    # Is the line the first heading?
+    m = title_re.match(l)
+    if m is not None:
+        h1 = m.group(1)
+        if title is None:
+            title = h1
+
     # Else, we assume the line is markdown
     slide.append(l)
 
@@ -115,7 +126,8 @@ if len(slide) > 0:
     presentation.append(section_template.format(default_attributes, "\n".join(slide)))
 
 # Replacement strings
-title = "Slides"
+if title is None:
+    title = "Slides"
 title = title_template.format(title)
 presentation = "\n".join(presentation + [""])
 options = "\n".join([options_word] + options + [""])
