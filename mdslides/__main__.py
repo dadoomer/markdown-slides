@@ -23,7 +23,7 @@ def main():
 
     revealjs_origin = resource_path/"reveal.js"
     markdown_file = target_path/Path(args.FILE)
-    revealjs_dir = markdown_file.parent/markdown_file.with_suffix('')
+    revealjs_dir = target_path/markdown_file.with_suffix('')
     index_file_original = target_path/revealjs_dir/ "index_template.html"
     index_file_new = target_path/revealjs_dir/ "index.html"
 
