@@ -9,20 +9,16 @@ See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
 This program appropriately inserts markdown files into Reveal.js files,
 completely avoiding the need to edit HTML files directly.
 
-# Quick start
-
-For example, to compile the example presentation:
+# Installation
 
 ```
-git clone https://gitlab.com/da_doomer/markdown-slides.git
-cd markdown-slides
-python make.py presentation.md --include media
+python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
 # Usage
 
 ```
-python make.py [-h] [--include RESOURCE] [--pdf] FILE
+mdslides [-h] [--include RESOURCE] [--pdf] FILE
 ```
 
 Notes:
