@@ -2,7 +2,7 @@
 animations and media, which can be visualized in a web browser even without
 an internet connection.**
 
-**See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides). For a quick start see the example [`presentation.md`](./presentation.md).
+**See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides) (and the source file [`presentation.md`](example/presentation.md)).
 
 See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
 
