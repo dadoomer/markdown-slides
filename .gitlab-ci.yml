@@ -3,7 +3,7 @@ image: python:3.8-alpine
 pages:
   stage: deploy
   script:
-    - python mdslides/__main__.py presentation.md --include media
+    - python mdslides/__main__.py example/presentation.md --include example/media
     - mv presentation public
   artifacts:
     paths:
