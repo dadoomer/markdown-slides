@@ -22,12 +22,12 @@ def main():
     target_path = pathlib.Path().absolute()
 
     revealjs_origin = resource_path/"reveal.js"
-    markdown_file = target_path/Path(args.FILE)
+    markdown_file = Path(args.FILE)
     revealjs_dir = target_path/markdown_file.with_suffix('')
-    index_file_original = target_path/revealjs_dir/ "index_template.html"
-    index_file_new = target_path/revealjs_dir/ "index.html"
+    index_file_original = target_path/revealjs_dir/"index_template.html"
+    index_file_new = target_path/revealjs_dir/"index.html"
 
-    def pdf_chromium_export(index_html_path : Path, output_pdf_path : Path):
+    def pdf_chromium_export(index_html_path: Path, output_pdf_path: Path):
         command = [
             'chromium',
             '--headless',
