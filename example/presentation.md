@@ -20,7 +20,7 @@ John Doe | College University | July 3, 2020
 [comment]: # (A comment starting with three or more !!! marks a slide break.)
 [comment]: # (!!!)
 
-This presentation was made with [markdown-slides](https://gitlab.com/da_doomer/markdown-slides).
+This presentation was made with [markdown-slides](https://gitlab.com/da_doomer/markdown-slides). The source markdown file is [presentation.md](example/presentation.md).
 
 [comment]: # (!!!)
 
@@ -59,7 +59,7 @@ everything *without breaking* your markdown files.
 
 ## Pictures
 
-![picture of spaghetti](media/image0.gif) <!-- .element: style="height:30vw; image-rendering: crisp-edges;" -->
+![picture of spaghetti](media/image0.gif) <!-- .element: style="height:50vh; width:100vw; image-rendering: crisp-edges;" -->
 
 Showcase media including images, videos and animations.
 
