@@ -20,7 +20,7 @@ John Doe | College University | July 3, 2020
 [comment]: # (A comment starting with three or more !!! marks a slide break.)
 [comment]: # (!!!)
 
-This presentation was made with [markdown-slides](https://gitlab.com/da_doomer/markdown-slides). The source markdown file is [presentation.md](example/presentation.md).
+This is a sample presentation to showcase [markdown-slides](https://gitlab.com/da_doomer/markdown-slides). The source markdown file is [presentation.md](example/presentation.md).
 
 [comment]: # (!!!)
 
@@ -59,7 +59,7 @@ everything *without breaking* your markdown files.
 
 ## Pictures
 
-![picture of spaghetti](media/image0.gif) <!-- .element: style="height:50vh; width:100vw; image-rendering: crisp-edges;" -->
+![picture of spaghetti](media/image0.gif) <!-- .element: style="height:50vh; max-width:80vw; image-rendering: crisp-edges;" -->
 
 Showcase media including images, videos and animations.
 
@@ -102,3 +102,19 @@ c(5);
 Animate code as well <!-- .element: class="fragment" data-fragment-index="1" -->
 
 [comment]: # (!!! data-auto-animate)
+
+Insert Youtube videos.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KPfzRSBzNX4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[comment]: # (!!!)
+
+Insert local videos.
+
+<iframe width="560" height="315" src="media/video.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[comment]: # (!!!)
+
+Download [markdown-slides](https://gitlab.com/da_doomer/markdown-slides)!
+
+[comment]: # (!!!)
