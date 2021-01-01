@@ -2,12 +2,15 @@
 animations and media, which can be visualized in a web browser even without
 an internet connection.**
 
-**See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides) (and the source file [`presentation.md`](example/presentation.md)).
-
 See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
 
 This program appropriately inserts markdown files into Reveal.js files,
 completely avoiding the need to edit HTML files directly.
+
+# Live demo
+
+**See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides) (and the source file [`presentation.md`](example/presentation.md)).
+
 
 # Installation
 
@@ -48,27 +51,25 @@ connection to display the presentations.
 
 # Syntax:
 
+You will probably only need to break slides:
+
+```md
+# My title
+A subtitle maybe
+
+[comment]: # (!!! Comments starting with this are slide breaks)
+
+Second slide. Easy :D
+```
+
+Other options are documented in the example presentation [`presentation.md`](example/presentation.md).
+
 If you need a quick refresher on markdown see e.g.
 [this cheatsheet](https://www.markdownguide.org/cheat-sheet/), the
 [CommonMark reference page](https://commonmark.org/help/), or this
 [Gfm tutorial](https://guides.github.com/features/mastering-markdown/).
 
 You will not have to break your markdown files to use this program. Control
-Reveal.js' theme and options using CommonMark-compliant comments:
-
-```md
-[comment]: # (Set the theme:)
-[comment]: # (THEME = white)
-[comment]: # (CODE_THEME = white)
-
-[comment]: # (Pass optional settings to reveal.js:)
-[comment]: # (controls: false)
-[comment]: # (keyboard: true)
-[comment]: # (markdown: { smartypants: true })
-[comment]: # (hash: true)
-
-[comment]: # (Comments starting with three or more exclamation signs mark slide-breaks)
-[comment]: # (!!!)
-```
+Reveal.js' theme and options using CommonMark-compliant comments.
 
 Everything but slide-break comments and option comments is passed to Reveal.js verbatim. Check out their documentation, especially the [markdown section](https://revealjs.com/markdown/).
