@@ -20,7 +20,7 @@ John Doe | College University | July 3, 2020
 [comment]: # (A comment starting with three or more !!! marks a slide break.)
 [comment]: # (!!!)
 
-This is a sample presentation to showcase [markdown-slides](https://gitlab.com/da_doomer/markdown-slides). The source markdown file is [presentation.md](example/presentation.md).
+This is a sample presentation to showcase [markdown-slides](https://gitlab.com/da_doomer/markdown-slides). The source markdown file is [presentation.md](https://gitlab.com/da_doomer/markdown-slides/-/blob/master/example/presentation.md).
 
 [comment]: # (!!!)
 
