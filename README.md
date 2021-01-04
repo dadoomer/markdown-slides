@@ -24,6 +24,12 @@ python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 mdslides [-h] [--include RESOURCE] [--pdf] FILE
 ```
 
+where
+
+- `RESOURCE`: any file or directory that should be included (e.g. a directory with pictures and videos)
+
+- `FILE`: input markdown file.
+
 Notes:
 
  - PDF exporting requires chromium (see [PDF exporting on
