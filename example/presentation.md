@@ -5,6 +5,8 @@
 [comment]: # (Set the theme:)
 [comment]: # (THEME = white)
 [comment]: # (CODE_THEME = zenburn)
+[comment]: # (The list of themes is at https://revealjs.com/themes/)
+[comment]: # (The list of code themes is at https://highlightjs.org/)
 
 [comment]: # (Pass optional settings to reveal.js:)
 [comment]: # (controls: false)
