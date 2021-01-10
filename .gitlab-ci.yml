@@ -1,9 +1,11 @@
-image: python:3.8-alpine
+image: alpine
 
 pages:
   stage: deploy
   script:
-    - python mdslides/__main__.py example/presentation.md --include example/media
+    - apk --no-cache add py3-pip python3-dev git
+    - pip3 install git+https://gitlab.com/da_doomer/markdown-slides.git
+    - mdslides example/presentation.md --include example/media
     - mv presentation public
   artifacts:
     paths:
