@@ -2,9 +2,9 @@
 
 **Using markdown, write simple but beautiful presentations with math,
 animations and media, which can be visualized in a web browser even without
-an internet connection.**
+an internet connection, or exported to PDF.**
 
-See the official [repo](https://gitlab.com/da_doomer/markdown-slides) on Gitlab.
+See the official [git repository hosted on Gitlab](https://gitlab.com/da_doomer/markdown-slides) or the [Github mirror](https://github.com/dadoomer/markdown-slides).
 
 This program appropriately inserts markdown files into Reveal.js files,
 completely avoiding the need to edit HTML files directly.
