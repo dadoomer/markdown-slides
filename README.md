@@ -1,3 +1,5 @@
+![logo](logos/wide.png)
+
 **Using markdown, write simple but beautiful presentations with math,
 animations and media, which can be visualized in a web browser even without
 an internet connection.**
