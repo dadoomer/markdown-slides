@@ -35,9 +35,11 @@ def main():
     target_path = pathlib.Path().absolute()
 
     revealjs_origin = resource_path/"reveal.js"
+    math_origin = resource_path/"KaTeX"
     markdown_file = Path(args.FILE)
     revealjs_dir = target_path/markdown_file.stem
-    index_file_original = target_path/revealjs_dir/"index_template.html"
+    math_dir = revealjs_dir/"KaTeX"
+    index_file_original = resource_path/"index_template.html"
     index_file_new = target_path/revealjs_dir/"index.html"
 
     def pdf_chromium_export(index_html_path: Path, output_pdf_path: Path):
@@ -152,6 +154,7 @@ def main():
     # Copy revealjs dir
     if not revealjs_dir.exists():
         shutil.copytree(revealjs_origin, revealjs_dir)
+        shutil.copytree(math_origin, math_dir)
 
     # Read html
     with open(index_file_original, "r") as f:

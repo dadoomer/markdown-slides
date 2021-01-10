@@ -1,0 +1,6 @@
+[submodule "mdslides/reveal.js"]
+	path = mdslides/reveal.js
+	url = https://github.com/hakimel/reveal.js.git
+[submodule "mdslides/KaTeX"]
+	path = mdslides/KaTeX
+	url = https://github.com/KaTeX/KaTeX.git
