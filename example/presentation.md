@@ -59,6 +59,7 @@ Use background videos and **text formatting**,
 everything *without breaking* your markdown files.
 
 [comment]: # (!!! data-background-video="media/video.mp4", data-background-video-loop data-background-video-muted data-background-opacity="0.2")
+[comment]: # (Other background options: https://revealjs.com/backgrounds/)
 
 ## Pictures
 
