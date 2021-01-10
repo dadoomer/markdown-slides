@@ -121,3 +121,24 @@ Insert local videos.
 Download [markdown-slides](https://gitlab.com/da_doomer/markdown-slides)!
 
 [comment]: # (!!!)
+
+A couple more examples follow.
+
+[comment]: # (!!!)
+
+![logo](media/wide.png)
+
+***use markdown to write slides***
+
+Author Name
+
+[comment]: # (!!!)
+
+[comment]: # (!!! data-background-image="media/inkscape.png" data-background-size="contain")
+
+| Insert | Tables |
+| ------ | ------ |
+| A row  | Another|
+| text   | more   |
+
+[comment]: # (!!!)

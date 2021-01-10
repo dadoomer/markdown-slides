@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="inkscape.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07, custom)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 144.15962 94.43779"
+   height="94.43779mm"
+   width="144.15962mm"
+   inkscape:export-filename="/home/leoncito/Documents/markdown-slides/example/media/inkscape.png"
+   inkscape:export-xdpi="1200"
+   inkscape:export-ydpi="1200">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6222299"
+     inkscape:cx="283.97161"
+     inkscape:cy="198.9911"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1042"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(163.84535,-131.85337)">
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:sans-serif;text-align:end;word-spacing:0px;text-anchor:end;stroke-width:0.264583"
+       x="-22.069126"
+       y="143.84592"
+       id="text933"><tspan
+         sodipodi:role="line"
+         id="tspan931"
+         x="-22.069124"
+         y="143.84592"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:Iosevka;stroke-width:0.264583">This slide was</tspan><tspan
+         sodipodi:role="line"
+         x="-22.069118"
+         y="157.30612"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:Iosevka;stroke-width:0.264583"
+         id="tspan935">written in inkscape</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.06268px;line-height:1.25;font-family:Iosevka;-inkscape-font-specification:'Iosevka Italic';text-align:end;word-spacing:0px;text-anchor:end;stroke-width:0.201567"
+       x="-24.404963"
+       y="172.45416"
+       id="text939"><tspan
+         sodipodi:role="line"
+         id="tspan937"
+         x="-24.404959"
+         y="172.45416"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:'Iosevka Italic';stroke-width:0.201567">First Author</tspan><tspan
+         sodipodi:role="line"
+         x="-24.404961"
+         y="182.53252"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:'Iosevka Italic';stroke-width:0.201567"
+         id="tspan941">Second Author</tspan><tspan
+         sodipodi:role="line"
+         x="-24.404959"
+         y="192.61087"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:'Iosevka Italic';stroke-width:0.201567"
+         id="tspan943">Third Author</tspan></text>
+    <rect
+       style="fill:#e343e2;fill-opacity:1;stroke-width:0.202063;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke"
+       id="rect956"
+       width="18.601681"
+       height="18.601681"
+       x="-150.09576"
+       y="202.99837" />
+    <rect
+       style="fill:#43e372;fill-opacity:1;stroke-width:0.202063;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke"
+       id="rect958"
+       width="13.195093"
+       height="6.5975466"
+       x="-98.294205"
+       y="211.39307" />
+    <rect
+       style="fill:#43dce3;fill-opacity:1;stroke-width:0.202063;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke"
+       id="rect960"
+       width="9.8558855"
+       height="19.711771"
+       x="-44.901741"
+       y="201.45062" />
+    <rect
+       style="fill:#7aaaac;fill-opacity:1;stroke-width:0.180355;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke"
+       id="rect962"
+       width="8.7072639"
+       height="17.775576"
+       x="-68.997604"
+       y="203.38683"
+       ry="4.353632" />
+    <rect
+       style="fill:#a81ecb;fill-opacity:1;stroke-width:0.284679;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke"
+       id="rect964"
+       width="16.445093"
+       height="10.507403"
+       x="-122.49175"
+       y="207.48322"
+       ry="5.2537017" />
+  </g>
+</svg>
