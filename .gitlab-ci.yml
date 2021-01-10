@@ -3,6 +3,7 @@ image: python:3.8-alpine
 pages:
   stage: deploy
   script:
+    - apt-get install -y git
     - python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
     - mdslides example/presentation.md --include example/media
     - mv presentation public
