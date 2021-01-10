@@ -225,3 +225,6 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+# Ignore example presentation
+example/presentation
