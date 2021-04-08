@@ -1,6 +1,7 @@
 [comment]: # (This presentation was made with markdown-slides)
 [comment]: # (This is a CommonMark compliant comment. It will not be included in the presentation.)
-[comment]: # (Compile this presentation with --include media)
+[comment]: # (Compile this presentation with the command below)
+[comment]: # (mdslides presentation.md --include media)
 
 [comment]: # (Set the theme:)
 [comment]: # (THEME = white)
