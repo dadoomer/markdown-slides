@@ -46,7 +46,7 @@ You will probably only need to break slides:
 # My title
 A subtitle maybe
 
-[comment]: # (!!! Comments starting with this are slide breaks)
+[comment]: # (!!!)
 
 Second slide. Easy :D
 ```
