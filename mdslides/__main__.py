@@ -59,17 +59,16 @@ def main():
 
     title_template = "<title>{}</title>"
     section_template = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
-    #section_template = "<section data-markdown {}>\n{}\n</section>"
     theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
     code_theme_template = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
 
-    option_re = r"\[comment\]: # \([ ]*(\w+)[ ]*:[ ]*(\w+)[ ]*\)"
+    option_re = r"\[comment\]: # \([ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*\)"
     option_re = re.compile(option_re)
     delimiter_re = r"\[comment\]: # \(\!\!\![ ]*(.*)\)"
     delimiter_re = re.compile(delimiter_re)
-    theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\w+)[ ]*\)"
+    theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\S+)[ ]*\)"
     theme_re = re.compile(theme_re)
-    code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\w+)[ ]*\)"
+    code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\S+)[ ]*\)"
     code_theme_re = re.compile(code_theme_re)
     title_re = r"#[#]*[ ]*(.*)"
     title_re = re.compile(title_re)
