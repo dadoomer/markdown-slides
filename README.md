@@ -67,18 +67,13 @@ Everything but slide-break comments and option comments is passed to Reveal.js v
 
 Some of Reveal.js's features are:
 
-- LaTeX syntax.
+- LaTeX math syntax.
 - Automatic animations.
 - Background videos and images.
 
 Everything is bundled in this repository so web browsers do not need internet
 connection to display the presentations.
 
-# Why:
+# Troubleshooting
 
- - Markdown is simple and portable. You can write markdown in a cellphone or
- in a remote server.
- - You want to write equations in LaTeX.
- - PDFs have no support for videos, but HTML does.
- - PowerPoint and LibreOffice are not available in all computers, but virtually
- every computer has a web browser.
+If you encounter any issues or have some questions, open an [issue on Gitlab](https://gitlab.com/da_doomer/markdown-slides/-/issues) or [on Github](https://github.com/dadoomer/markdown-slides/issues).
