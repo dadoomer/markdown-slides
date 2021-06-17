@@ -12,6 +12,7 @@ mdslidesdata = revealjsdata + katexdata + ["mdslides/index_template.html"]
 mdslidesdata = [str(Path(p).relative_to("mdslides")) for p in mdslidesdata]
 
 setup(name='MarkdownSlides',
+      python_requires='>=3.8',
       version='1.1',
       description='Write modern slides with markdown.',
       packages=['mdslides'],
