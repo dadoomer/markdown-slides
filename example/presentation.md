@@ -13,7 +13,7 @@
 [comment]: # "THEME = white"
 
 [comment]: # (Pass optional settings to reveal.js:)
-[comment]: # (controls: true)
+[comment]: # (controls: false)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
 [comment]: # (hash: false)
