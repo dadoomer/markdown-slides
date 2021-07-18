@@ -64,9 +64,9 @@ Notes:
 
 ## QuickStart Example
 
-1. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md).
+1. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md) folder.
    ```bash
-   wget -O presentation.md https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md
+    wget "https://gitlab.com/da_doomer/markdown-slides/-/archive/master/markdown-slides-master.zip?path=example"; unzip markdown-slides-master.zip\?path=example; cd markdown-slides-master-example/example;
    ```
 2. Render the slide deck into a web page
    ```bash
