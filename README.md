@@ -13,6 +13,7 @@ completely avoiding the need to edit HTML files directly.
 
 **See for yourself**: check out the [live demo](https://da_doomer.gitlab.io/markdown-slides) (and the source file [`presentation.md`](example/presentation.md)).
 
+![](https://user-images.githubusercontent.com/122831/126051928-0209a791-3846-4e61-aae7-8ca0dcc9f41a.png)
 
 # Installation
 
