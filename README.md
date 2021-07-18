@@ -17,8 +17,29 @@ completely avoiding the need to edit HTML files directly.
 
 # Installation
 
-```
+```bash
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
+```
+
+Don't have python? Your version of python not working?
+
+Here's a fearless, conflict-free python install that Just Works™:
+
+```bash
+curl -sS https://webinstall.dev/pyenv | bash
+export PATH=~/.pyenv/bin:"$PATH"
+export PATH=~/.pyenv/shims:"$PATH"
+```
+
+```bash
+# Install v3.9.1, which works with mdslides
+pyenv install -v 3.9.1
+
+# Switch to python 3.9.1, conflict free
+pyenv global 3.9.1
+
+# Switch to your original system python
+pyenv global system
 ```
 
 # Usage
