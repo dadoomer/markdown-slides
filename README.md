@@ -16,13 +16,13 @@ completely avoiding the need to edit HTML files directly.
 
 # Installation
 
-```
+```bash
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
 # Usage
 
-```
+```bash
 mdslides [-h] [--include RESOURCE] [--pdf] FILE
 ```
 
@@ -37,6 +37,21 @@ Notes:
  - PDF exporting requires chromium (see [PDF exporting on
 	 reveal-js](https://revealjs.com/pdf-export/)).
 
+
+## QuickStart Example
+
+1. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md).
+   ```bash
+   wget -O presentation.md https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md
+   ```
+2. Render the slide deck into a web page
+   ```bash
+   mdslides ./presentation.md
+   ```
+3. Open the slides in your browser (or publish to github pages)
+   ```bash
+   open ./presentation/index.html
+   ```
 
 # Syntax:
 
