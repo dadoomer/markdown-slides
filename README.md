@@ -21,7 +21,7 @@ completely avoiding the need to edit HTML files directly.
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
-Don't have python? Your version of python not working? Scroll down to [troubleshooting Python installation](https://gitlab.com/da_doomer/markdown-slides/-/edit/master/README.md#python-installation).
+Don't have python? Your version of python not working? Scroll down to [troubleshooting Python installation](#python-installation).
 
 # Usage
 
@@ -43,15 +43,17 @@ Notes:
 
 ## QuickStart Example
 
-1. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md) folder.
+1. Install markdown-slides
+
+2. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md) folder.
    ```bash
     wget "https://gitlab.com/da_doomer/markdown-slides/-/archive/master/markdown-slides-master.zip?path=example"; unzip markdown-slides-master.zip\?path=example; cd markdown-slides-master-example/example;
    ```
-2. Render the slide deck into a web page
+3. Render the slide deck into a web page
    ```bash
    mdslides ./presentation.md
    ```
-3. Open the slides in your browser (or publish to github pages)
+4. Open the slides in your browser (or publish to github pages)
    ```bash
    open ./presentation/index.html
    ```
