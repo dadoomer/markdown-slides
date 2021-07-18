@@ -21,28 +21,7 @@ completely avoiding the need to edit HTML files directly.
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
-Don't have python? Your version of python not working?
-
-Here's a fearless, conflict-free python install that Just Works™ on a bash shell:
-
-```bash
-curl -sS https://webinstall.dev/pyenv | bash
-export PATH=~/.pyenv/bin:"$PATH"
-export PATH=~/.pyenv/shims:"$PATH"
-```
-
-```bash
-# Install v3.9.1, which works with mdslides
-pyenv install -v 3.9.1
-
-# Switch to python 3.9.1, conflict free
-pyenv global 3.9.1
-
-# Install and use mdslides
-
-# Switch to your original system python
-pyenv global system
-```
+Don't have python? Your version of python not working? Scroll down to [troubleshooting Python installation](https://gitlab.com/da_doomer/markdown-slides/-/edit/master/README.md#python-installation).
 
 # Usage
 
@@ -116,3 +95,26 @@ connection to display the presentations.
 # Troubleshooting
 
 If you encounter any issues or have some questions, open an [issue on Gitlab](https://gitlab.com/da_doomer/markdown-slides/-/issues) or [on Github](https://github.com/dadoomer/markdown-slides/issues).
+
+## Python installation
+
+Markdown-slides works with Python 3.9 or newer. Here's a fearless, conflict-free python install that Just Works™ on a bash shell:
+
+```bash
+curl -sS https://webinstall.dev/pyenv | bash
+export PATH=~/.pyenv/bin:"$PATH"
+export PATH=~/.pyenv/shims:"$PATH"
+```
+
+```bash
+# Install v3.9.1, which works with mdslides
+pyenv install -v 3.9.1
+
+# Switch to python 3.9.1, conflict free
+pyenv global 3.9.1
+
+# Install and use mdslides
+
+# Switch to your original system python
+pyenv global system
+```
