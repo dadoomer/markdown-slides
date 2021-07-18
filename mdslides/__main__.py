@@ -161,8 +161,6 @@ def main():
 
     # Copy revealjs dir
     if not revealjs_dir.exists():
-        print("AD")
-        print(revealjs_origin, revealjs_dir)
         shutil.copytree(revealjs_origin, revealjs_dir)
         shutil.copytree(math_origin, math_dir)
 
