@@ -23,7 +23,7 @@ python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 
 Don't have python? Your version of python not working?
 
-Here's a fearless, conflict-free python install that Just Works™:
+Here's a fearless, conflict-free python install that Just Works™ on a bash shell:
 
 ```bash
 curl -sS https://webinstall.dev/pyenv | bash
@@ -37,6 +37,8 @@ pyenv install -v 3.9.1
 
 # Switch to python 3.9.1, conflict free
 pyenv global 3.9.1
+
+# Install and use mdslides
 
 # Switch to your original system python
 pyenv global system
