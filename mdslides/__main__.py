@@ -62,13 +62,22 @@ def main():
     theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
     code_theme_template = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
 
-    option_re = r"\[comment\]: # \([ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*\)"
+    # Read both comment formats (first one is CommonMark compliant, second one
+    # is common format).
+    # [comment]: (stuff)
+    # [comment]: "stuff"
+    re_template = r"\[comment\]: # [(\"]{0}[)\"]"
+    option_re = r"[ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*"
+    option_re = re_template.format(option_re)
     option_re = re.compile(option_re)
-    delimiter_re = r"\[comment\]: # \(\!\!\![ ]*(.*)\)"
+    delimiter_re = r"\!\!\![ ]*(.*)"
+    delimiter_re = re_template.format(delimiter_re)
     delimiter_re = re.compile(delimiter_re)
-    theme_re = r"\[comment\]: # \([ ]*THEME[ ]*=[ ]*(\S+)[ ]*\)"
+    theme_re = r"[ ]*THEME[ ]*=[ ]*(\S+)[ ]*"
+    theme_re = re_template.format(theme_re)
     theme_re = re.compile(theme_re)
-    code_theme_re = r"\[comment\]: # \([ ]*CODE_THEME[ ]*=[ ]*(\S+)[ ]*\)"
+    code_theme_re = r"[ ]*CODE_THEME[ ]*=[ ]*(\S+)[ ]*"
+    code_theme_re = re_template.format(code_theme_re)
     code_theme_re = re.compile(code_theme_re)
     title_re = r"#[#]*[ ]*(.*)"
     title_re = re.compile(title_re)
@@ -152,6 +161,8 @@ def main():
 
     # Copy revealjs dir
     if not revealjs_dir.exists():
+        print("AD")
+        print(revealjs_origin, revealjs_dir)
         shutil.copytree(revealjs_origin, revealjs_dir)
         shutil.copytree(math_origin, math_dir)
 

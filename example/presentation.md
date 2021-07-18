@@ -9,8 +9,11 @@
 [comment]: # (The list of themes is at https://revealjs.com/themes/)
 [comment]: # (The list of code themes is at https://highlightjs.org/)
 
+[comment]: # "You can also use quotes instead of parenthesis"
+[comment]: # "THEME = white"
+
 [comment]: # (Pass optional settings to reveal.js:)
-[comment]: # (controls: false)
+[comment]: # (controls: true)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
 [comment]: # (hash: false)
