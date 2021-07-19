@@ -100,23 +100,48 @@ If you encounter any issues or have some questions, open an [issue on Gitlab](ht
 
 ## Fearless, Conflict-free Python installation
 
-Markdown-slides works with Python 3.9 or newer. Here's a fearless, conflict-free python install that Just Works™ in bash, zsh, and fish:
+Markdown-slides works with Python 3.9 or newer.
+
+Here's a fearless, conflict-free python install that Just Works™ in bash, zsh, and fish:
+
+1. [Webi](https://webinistall.dev) will install `pyenv` (the python version manager) to `~/.pyenv`, where it won't conflict with your system python, or any projects:
+   ```bash
+   curl -sS https://webinstall.dev/pyenv | bash
+   ```
+2. After installation you'll need to **CLOSE and RE-OPEN** your terminal, or update your `PATH`:
+   ```bash
+   export PATH=~/.pyenv/bin:"$PATH"
+   export PATH=~/.pyenv/shims:"$PATH"
+   ```
+3. Now you can install Python v3.9.1 (safely in `~/.pyenv`):
+   ```bash
+   # Install v3.9.1, which works with mdslides
+   pyenv install -v 3.9.1
+   ```
+4. When you need to use `mdslides`, use `pyenv` to set your SHELL's python to 3.9.1:
+   (and you can set it right back afterwards)
+   ```bash
+   # Switch to python 3.9.1, conflict free
+   pyenv global 3.9.1
+
+   # Install and use mdslides
+
+   # Switch to your original system python
+   pyenv global system
+   ```
+
+**Bonus**: You can tell `pyenv` to automatically pick Python 3.9.1 whenever you're in your slides folder:
 
 ```bash
-curl -sS https://webinstall.dev/pyenv | bash
-export PATH=~/.pyenv/bin:"$PATH"
-export PATH=~/.pyenv/shims:"$PATH"
-```
+cd ./path/to/my/presentations/
+pyenv local 3.9.1
 
-```bash
-# Install v3.9.1, which works with mdslides
-pyenv install -v 3.9.1
+# the presentations folder is now set to use python 3.9.1
+cat ./.python-version # 3.9.1
+python --version
+Python 3.9.1
 
-# Switch to python 3.9.1, conflict free
-pyenv global 3.9.1
-
-# Install and use mdslides
-
-# Switch to your original system python
-pyenv global system
+cd -
+python --version
+Python x.x.x
 ```
