@@ -21,7 +21,7 @@ completely avoiding the need to edit HTML files directly.
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
-Don't have python? Your version of python not working? Scroll down to [troubleshooting Python installation](#python-installation).
+Don't have python? Your version of python not working? Scroll down to [fearless, conflict-free Python installation](#fearless-conflict-free-python-installation).
 
 # Usage
 
@@ -98,9 +98,9 @@ connection to display the presentations.
 
 If you encounter any issues or have some questions, open an [issue on Gitlab](https://gitlab.com/da_doomer/markdown-slides/-/issues) or [on Github](https://github.com/dadoomer/markdown-slides/issues).
 
-## Python installation
+## Fearless, Conflict-free Python installation
 
-Markdown-slides works with Python 3.9 or newer. Here's a fearless, conflict-free python install that Just Works™ on a bash shell:
+Markdown-slides works with Python 3.9 or newer. Here's a fearless, conflict-free python install that Just Works™ in bash, zsh, and fish:
 
 ```bash
 curl -sS https://webinstall.dev/pyenv | bash
