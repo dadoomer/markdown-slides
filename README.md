@@ -45,13 +45,13 @@ Notes:
 
 1. Install markdown-slides
 
-2. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md) folder.
+2. Download the example [presentation.md](https://raw.githubusercontent.com/dadoomer/markdown-slides/master/example/presentation.md) folder
    ```bash
     wget "https://gitlab.com/da_doomer/markdown-slides/-/archive/master/markdown-slides-master.zip?path=example"; unzip markdown-slides-master.zip\?path=example; cd markdown-slides-master-example/example;
    ```
-3. Render the slide deck into a web page
+3. Render the slide deck into a web page, including the `media` folder
    ```bash
-   mdslides ./presentation.md
+   mdslides ./presentation.md --include media
    ```
 4. Open the slides in your browser (or publish to github pages)
    ```bash
