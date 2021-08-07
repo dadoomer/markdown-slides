@@ -13,7 +13,7 @@
 [comment]: # "THEME = white"
 
 [comment]: # (Pass optional settings to reveal.js:)
-[comment]: # (controls: false)
+[comment]: # (controls: true)
 [comment]: # (keyboard: true)
 [comment]: # (markdown: { smartypants: true })
 [comment]: # (hash: false)
@@ -141,9 +141,29 @@ Author Name
 
 [comment]: # (!!! data-background-image="media/inkscape.png" data-background-size="contain")
 
+Press down on your keyboard or swipe down.
+
+[comment]: # (|||)
+
+**Vertical slides!**
+
+[comment]: # (|||)
+
+As many vertical slides as you like.
+
+[comment]: # (!!!)
+
+Add tables:
+
 | Insert | Tables |
 | ------ | ------ |
 | A row  | Another|
 | text   | more   |
 
 [comment]: # (!!!)
+
+## Vertical separator
+
+----------
+
+Some other text.
