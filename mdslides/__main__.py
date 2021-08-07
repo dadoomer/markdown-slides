@@ -59,6 +59,7 @@ def main():
 
     title_template = "<title>{}</title>"
     section_template = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
+    vertical_section_template = "<section>\n{}\n</section>"
     theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
     code_theme_template = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
 
@@ -73,6 +74,8 @@ def main():
     delimiter_re = r"\!\!\![ ]*(.*)"
     delimiter_re = re_template.format(delimiter_re)
     delimiter_re = re.compile(delimiter_re)
+    vertical_delimiter_re = r"\[comment\]: # \(\|\|\|[ ]*(.*)\)"
+    vertical_delimiter_re = re.compile(vertical_delimiter_re)
     theme_re = r"[ ]*THEME[ ]*=[ ]*(\S+)[ ]*"
     theme_re = re_template.format(theme_re)
     theme_re = re.compile(theme_re)
@@ -97,6 +100,7 @@ def main():
     # Build presentation
     presentation = list()
     slide = list()
+    vertical_slide = list()
     options = ["{} : {},".format(key, val)
                for key, val in default_options.items()]
     theme = default_theme
@@ -116,9 +120,28 @@ def main():
         m = delimiter_re.match(line)
         if m is not None:
             attributes = default_attributes + " " + m.group(1)
-            presentation.append(
+            if vertical_slide:
+                vertical_slide.append(
                     section_template.format(attributes, "\n".join(slide))
                 )
+                presentation.append(
+                    vertical_section_template.format("\n".join(vertical_slide))
+                 )
+                vertical_slide = list()
+            else:
+                presentation.append(
+                    section_template.format(attributes, "\n".join(slide))
+                )
+            slide = list()
+            continue
+
+        # Is the line a vertical slide break?
+        m = vertical_delimiter_re.match(line)
+        if m is not None:
+            attributes = default_attributes + " " + m.group(1)
+            vertical_slide.append(
+                section_template.format(attributes, "\n".join(slide))
+            )
             slide = list()
             continue
 
@@ -145,6 +168,10 @@ def main():
         slide.append(line)
 
     # Did the user forget to insert the final slide break?
+    if vertical_slide:
+        presentation.append(
+            vertical_section_template.format("\n".join(vertical_slide))
+         )
     if len(slide) > 0:
         presentation.append(
                 section_template.format(default_attributes, "\n".join(slide))
