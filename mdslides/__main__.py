@@ -45,7 +45,7 @@ DEFAULT_OPTIONS = {
     }
 
 
-REVEALJS_CRITICAL_PATHS = ["dist", "plugin", "LICENSE", "KaTeX"]
+REVEALJS_CRITICAL_PATHS = ["dist", "plugin", "LICENSE"]
 
 
 def build_slides(
@@ -58,9 +58,7 @@ def build_slides(
     target_path = pathlib.Path().absolute()
 
     revealjs_origin = resource_path/"reveal.js"
-    math_origin = resource_path/"KaTeX"
     revealjs_dir = target_path/markdown_file.stem
-    math_dir = revealjs_dir/"KaTeX"
     index_file_original = resource_path/"index_template.html"
     index_file_new = target_path/revealjs_dir/"index.html"
 
@@ -163,7 +161,6 @@ def build_slides(
     # Copy revealjs dir
     if not revealjs_dir.exists():
         shutil.copytree(revealjs_origin, revealjs_dir)
-        shutil.copytree(math_origin, math_dir)
         critical_paths.extend(
                 revealjs_dir/path for path in REVEALJS_CRITICAL_PATHS
             )
@@ -203,7 +200,6 @@ def build_slides(
         critical_paths.append(target_path)
 
     # Remove unused reveal development files
-    print(critical_paths)
     for path in revealjs_dir.glob("*"):
         if path not in critical_paths:
             if path.is_dir():
@@ -217,6 +213,10 @@ def build_slides(
                 index_file_new, markdown_file.with_suffix('.pdf')
             )
         print("Wrote {}".format(markdown_file.with_suffix('.pdf')))
+
+    print("Done. Open {} with your web browser".format(
+        revealjs_dir/"index.html")
+        )
 
 
 def main():
