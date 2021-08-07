@@ -1,16 +1,219 @@
-#!/bin/python3.8
+"""Module for calling mdslides as an executable."""
+import pathlib
 from pathlib import Path
 import argparse
 import shutil
-import subprocess
 import re
+from .pdf import export as pdf_export
+
+DATA_WORD = "DATA"
+TITLE_WORD = "TITLE"
+OPTIONS_WORD = "Reveal.initialize({"
+THEME_WORD = '<link rel="stylesheet" href="dist/theme'
+CODE_THEME_WORD = '<link rel="stylesheet" href="plugin/highlight'
+
+TITLE_TEMPLATE = "<title>{}</title>"
+SECTION_TEMPLATE = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
+VERTICAL_SECTION_TEMPLATE = "<section>\n{}\n</section>"
+THEME_TEMPLATE = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
+CODE_THEME_TEMPLATE = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
+
+# Read both comment formats (first one is CommonMark compliant, second one
+# is common format).
+# [comment]: (stuff)
+# [comment]: "stuff"
+RE_TEMPLATE = r"\[comment\]: # [(\"]{0}[)\"]"
+OPTION_RE_PATTERN = r"[ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*"
+DELIMITER_RE_PATTERN = r"\!\!\![ ]*(.*)"
+VERTICAL_DELIMITER_RE_PATTERN = r"\|\|\|[ ]*(.*)"
+THEME_RE_PATTERN = r"[ ]*THEME[ ]*=[ ]*(\S+)[ ]*"
+CODE_THEME_RE_PATTERN = r"[ ]*CODE_THEME[ ]*=[ ]*(\S+)[ ]*"
+TITLE_RE_PATTERN = r"#[#]*[ ]*(.*)"
+option_re = re.compile(RE_TEMPLATE.format(OPTION_RE_PATTERN))
+delimiter_re = re.compile(RE_TEMPLATE.format(DELIMITER_RE_PATTERN))
+vertical_delimiter_re = re.compile(RE_TEMPLATE.format(VERTICAL_DELIMITER_RE_PATTERN))
+theme_re = re.compile(RE_TEMPLATE.format(THEME_RE_PATTERN))
+code_theme_re = re.compile(RE_TEMPLATE.format(CODE_THEME_RE_PATTERN))
+title_re = re.compile(TITLE_RE_PATTERN)
+
+DEFAULT_ATTRIBUTES = ""
+DEFAULT_THEME = "white"
+DEFAULT_CODE_THEME = "zenburn"
+DEFAULT_OPTIONS = {
+        "controls": "false",
+        "markdown": "{smartypants: true}",
+    }
+
+
+def build_slides(
+        markdown_file: Path,
+        include_paths: list[Path],
+        export_to_pdf: Path,
+        ):
+    """Build slides in the given markdown file."""
+    export_to_html = not export_to_pdf
+
+    resource_path = pathlib.Path(__file__).parent.absolute()
+    target_path = pathlib.Path().absolute()
+
+    revealjs_origin = resource_path/"reveal.js"
+    math_origin = resource_path/"KaTeX"
+    revealjs_dir = target_path/markdown_file.stem
+    math_dir = revealjs_dir/"KaTeX"
+    index_file_original = resource_path/"index_template.html"
+    index_file_new = target_path/revealjs_dir/"index.html"
+
+    # Open markdown file
+    with open(markdown_file) as f_p:
+        presentation_markdown = list(f_p)
+
+    # Build presentation
+    presentation = list()
+    slide: list[str] = list()
+    vertical_slide: list[str] = list()
+    options = ["{} : {},".format(key, val)
+               for key, val in DEFAULT_OPTIONS.items()]
+    theme = DEFAULT_THEME
+    code_theme = DEFAULT_CODE_THEME
+    attributes = DEFAULT_ATTRIBUTES
+    title = None
+    for line in presentation_markdown:
+        line = line[:-1]
+
+        # Is the line setting an option?
+        match = option_re.match(line)
+        if match is not None:
+            options.append("{} : {},".format(match.group(1), match.group(2)))
+            continue
+
+        # Is the line a slide break?
+        match = delimiter_re.match(line)
+        if match is not None:
+            attributes = DEFAULT_ATTRIBUTES + " " + match.group(1)
+            if vertical_slide:
+                vertical_slide.append(
+                    SECTION_TEMPLATE.format(attributes, "\n".join(slide))
+                )
+                presentation.append(
+                    VERTICAL_SECTION_TEMPLATE.format("\n".join(vertical_slide))
+                 )
+                vertical_slide = list()
+            else:
+                presentation.append(
+                    SECTION_TEMPLATE.format(attributes, "\n".join(slide))
+                )
+            slide = list()
+            continue
+
+        # Is the line a vertical slide break?
+        match = vertical_delimiter_re.match(line)
+        if match is not None:
+            attributes = DEFAULT_ATTRIBUTES + " " + match.group(1)
+            vertical_slide.append(
+                SECTION_TEMPLATE.format(attributes, "\n".join(slide))
+            )
+            slide = list()
+            continue
+
+        # Is the line setting a theme?
+        match = theme_re.match(line)
+        if match is not None:
+            theme = match.group(1)
+            continue
+
+        # Is the line setting a code theme?
+        match = code_theme_re.match(line)
+        if match is not None:
+            code_theme = match.group(1)
+            continue
+
+        # Is the line the first heading?
+        match = title_re.match(line)
+        if match is not None:
+            header = match.group(1)
+            if title is None:
+                title = header
+
+        # Else, we assume the line is markdown
+        slide.append(line)
+
+    # Did the user forget to insert the final slide break?
+    if vertical_slide:
+        presentation.append(
+            VERTICAL_SECTION_TEMPLATE.format("\n".join(vertical_slide))
+         )
+    if len(slide) > 0:
+        presentation.append(
+                SECTION_TEMPLATE.format(DEFAULT_ATTRIBUTES, "\n".join(slide))
+            )
+
+    # Replacement strings
+    if title is None:
+        title = "Slides"
+    title = TITLE_TEMPLATE.format(title)
+    presentation_str = "\n".join(presentation + [""])
+    options_str = "\n".join([OPTIONS_WORD] + options + [""])
+    theme = THEME_TEMPLATE.format(theme)
+    code_theme = CODE_THEME_TEMPLATE.format(code_theme)
+
+    # Copy revealjs dir
+    if not revealjs_dir.exists():
+        shutil.copytree(revealjs_origin, revealjs_dir)
+        shutil.copytree(math_origin, math_dir)
+
+    # Read html
+    with open(index_file_original, "r") as f_p:
+        index_html = list(f_p)
+
+    # Replace title
+    index_html = [line if TITLE_WORD not in line else title
+                  for line in index_html]
+    # Replace theme
+    index_html = [line if THEME_WORD not in line else theme
+                  for line in index_html]
+    # Replace code theme
+    index_html = [line if CODE_THEME_WORD not in line else code_theme
+                  for line in index_html]
+    # Replace presentation
+    index_html = [line if DATA_WORD not in line else presentation_str
+                  for line in index_html]
+    # Replace options
+    index_html = [line if OPTIONS_WORD not in line else options_str
+                  for line in index_html]
+
+    # Copy index file
+    with open(index_file_new, "w") as f_p:
+        f_p.write("".join(index_html))
+
+    # Copy include files
+    for path in include_paths:
+        if path.is_dir:
+            shutil.copytree(
+                    path, revealjs_dir/path.parts[-1], dirs_exist_ok=True
+                )
+        else:
+            shutil.copy(path, revealjs_dir/path.parts[-1])
+
+    # Export to PDF if needed
+    if export_to_pdf:
+        pdf_export(
+                index_file_new, markdown_file.with_suffix('.pdf')
+            )
+        print("Wrote {}".format(markdown_file.with_suffix('.pdf')))
+
+    if export_to_html:
+        # Change output folder name
+        print("Done. Open {} with your web browser".format(
+                revealjs_dir/"index.html")
+              )
 
 
 def main():
+    """Command-line callable function."""
     parser = argparse.ArgumentParser(
             description='Convert a markdown file to a reveal.js presentation.'
         )
-    parser.add_argument('FILE', type=str, help="Markdown file.")
+    parser.add_argument('FILE', type=Path, help="Markdown file.")
     parser.add_argument(
             '--include',
             metavar="RESOURCE",
@@ -25,222 +228,11 @@ def main():
             action="store_true"
         )
     args = parser.parse_args()
-    export_to_pdf = args.pdf
-    export_to_html = not export_to_pdf
-
-    # TODO: export to pdf, change name of output folder
-
-    import pathlib
-    resource_path = pathlib.Path(__file__).parent.absolute()
-    target_path = pathlib.Path().absolute()
-
-    revealjs_origin = resource_path/"reveal.js"
-    math_origin = resource_path/"KaTeX"
-    markdown_file = Path(args.FILE)
-    revealjs_dir = target_path/markdown_file.stem
-    math_dir = revealjs_dir/"KaTeX"
-    index_file_original = resource_path/"index_template.html"
-    index_file_new = target_path/revealjs_dir/"index.html"
-
-    def pdf_chromium_export(index_html_path: Path, output_pdf_path: Path):
-        command = [
-            'chromium',
-            '--headless',
-            '--print-to-pdf={}'.format(output_pdf_path),
-            index_html_path.resolve().as_uri()+'?print-pdf',
-        ]
-        subprocess.run(command)
-
-    magic_word = "DATA"
-    title_word = "TITLE"
-    options_word = "Reveal.initialize({"
-    theme_word = '<link rel="stylesheet" href="dist/theme'
-    code_theme_word = '<link rel="stylesheet" href="plugin/highlight'
-
-    title_template = "<title>{}</title>"
-    section_template = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
-    vertical_section_template = "<section>\n{}\n</section>"
-    theme_template = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
-    code_theme_template = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
-
-    # Read both comment formats (first one is CommonMark compliant, second one
-    # is common format).
-    # [comment]: (stuff)
-    # [comment]: "stuff"
-    re_template = r"\[comment\]: # [(\"]{0}[)\"]"
-    option_re = r"[ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*"
-    option_re = re_template.format(option_re)
-    option_re = re.compile(option_re)
-    delimiter_re = r"\!\!\![ ]*(.*)"
-    delimiter_re = re_template.format(delimiter_re)
-    delimiter_re = re.compile(delimiter_re)
-    vertical_delimiter_re = r"\[comment\]: # \(\|\|\|[ ]*(.*)\)"
-    vertical_delimiter_re = re.compile(vertical_delimiter_re)
-    theme_re = r"[ ]*THEME[ ]*=[ ]*(\S+)[ ]*"
-    theme_re = re_template.format(theme_re)
-    theme_re = re.compile(theme_re)
-    code_theme_re = r"[ ]*CODE_THEME[ ]*=[ ]*(\S+)[ ]*"
-    code_theme_re = re_template.format(code_theme_re)
-    code_theme_re = re.compile(code_theme_re)
-    title_re = r"#[#]*[ ]*(.*)"
-    title_re = re.compile(title_re)
-
-    default_attributes = ""
-    default_theme = "white"
-    default_code_theme = "zenburn"
-    default_options = {
-            "controls": "false",
-            "markdown": "{smartypants: true}",
-        }
-
-    # Open markdown file
-    with open(markdown_file) as f:
-        presentation_markdown = list(f)
-
-    # Build presentation
-    presentation = list()
-    slide = list()
-    vertical_slide = list()
-    options = ["{} : {},".format(key, val)
-               for key, val in default_options.items()]
-    theme = default_theme
-    code_theme = default_code_theme
-    attributes = default_attributes
-    title = None
-    for line in presentation_markdown:
-        line = line[:-1]
-
-        # Is the line setting an option?
-        m = option_re.match(line)
-        if m is not None:
-            options.append("{} : {},".format(m.group(1), m.group(2)))
-            continue
-
-        # Is the line a slide break?
-        m = delimiter_re.match(line)
-        if m is not None:
-            attributes = default_attributes + " " + m.group(1)
-            if vertical_slide:
-                vertical_slide.append(
-                    section_template.format(attributes, "\n".join(slide))
-                )
-                presentation.append(
-                    vertical_section_template.format("\n".join(vertical_slide))
-                 )
-                vertical_slide = list()
-            else:
-                presentation.append(
-                    section_template.format(attributes, "\n".join(slide))
-                )
-            slide = list()
-            continue
-
-        # Is the line a vertical slide break?
-        m = vertical_delimiter_re.match(line)
-        if m is not None:
-            attributes = default_attributes + " " + m.group(1)
-            vertical_slide.append(
-                section_template.format(attributes, "\n".join(slide))
-            )
-            slide = list()
-            continue
-
-        # Is the line setting a theme?
-        m = theme_re.match(line)
-        if m is not None:
-            theme = m.group(1)
-            continue
-
-        # Is the line setting a code theme?
-        m = code_theme_re.match(line)
-        if m is not None:
-            code_theme = m.group(1)
-            continue
-
-        # Is the line the first heading?
-        m = title_re.match(line)
-        if m is not None:
-            h1 = m.group(1)
-            if title is None:
-                title = h1
-
-        # Else, we assume the line is markdown
-        slide.append(line)
-
-    # Did the user forget to insert the final slide break?
-    if vertical_slide:
-        presentation.append(
-            vertical_section_template.format("\n".join(vertical_slide))
-         )
-    if len(slide) > 0:
-        presentation.append(
-                section_template.format(default_attributes, "\n".join(slide))
-            )
-
-    # Replacement strings
-    if title is None:
-        title = "Slides"
-    title = title_template.format(title)
-    presentation = "\n".join(presentation + [""])
-    options = "\n".join([options_word] + options + [""])
-    theme = theme_template.format(theme)
-    code_theme = code_theme_template.format(code_theme)
-
-    # Copy revealjs dir
-    if not revealjs_dir.exists():
-        shutil.copytree(revealjs_origin, revealjs_dir)
-        shutil.copytree(math_origin, math_dir)
-
-    # Read html
-    with open(index_file_original, "r") as f:
-        index_html = list(f)
-
-    # Replace title
-    index_html = [line if title_word not in line else title
-                  for line in index_html]
-    # Replace theme
-    index_html = [line if theme_word not in line else theme
-                  for line in index_html]
-    # Replace code theme
-    index_html = [line if code_theme_word not in line else code_theme
-                  for line in index_html]
-    # Replace presentation
-    index_html = [line if magic_word not in line else presentation
-                  for line in index_html]
-    # Replace options
-    index_html = [line if options_word not in line else options
-                  for line in index_html]
-
-    with open(index_file_new, "w") as f:
-        f.write("".join(index_html))
-
-    # Copy include files
-    for path in [Path(p) for p in args.include]:
-        if path.is_dir:
-            shutil.copytree(
-                    path, revealjs_dir/path.parts[-1], dirs_exist_ok=True
-                )
-        else:
-            shutil.copy(path, revealjs_dir/path.parts[-1], exist_ok=True)
-
-    # Export to PDF if needed
-    if export_to_pdf:
-        try:
-            pdf_chromium_export(
-                    index_file_new, markdown_file.with_suffix('.pdf')
-                )
-            print("Wrote {}".format(markdown_file.with_suffix('.pdf')))
-
-        except Exception as e:
-            print("Chromium exporting failed")
-            print(e)
-            print("Make sure chromium is installed and in your path")
-
-    if export_to_html:
-        # Change output folder name
-        print("Done. Open {} with your web browser".format(
-                revealjs_dir/"index.html")
-              )
+    build_slides(
+            export_to_pdf=args.pdf,
+            markdown_file=args.FILE,
+            include_paths=[Path(p) for p in args.include],
+        )
 
 
 if __name__ == "__main__":
