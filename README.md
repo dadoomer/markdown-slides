@@ -91,8 +91,7 @@ Some of Reveal.js's features are:
 - Automatic animations.
 - Background videos and images.
 
-Everything is bundled in this repository so web browsers do not need internet
-connection to display the presentations.
+Keep in mind you need an Internet connection to render equations (see [issue #9](https://gitlab.com/da_doomer/markdown-slides/-/issues/9)).
 
 # Troubleshooting
 
