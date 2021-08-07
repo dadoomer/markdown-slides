@@ -45,14 +45,15 @@ DEFAULT_OPTIONS = {
     }
 
 
+REVEALJS_CRITICAL_PATHS = ["dist", "plugin", "LICENSE", "KaTeX"]
+
+
 def build_slides(
         markdown_file: Path,
         include_paths: list[Path],
         export_to_pdf: Path,
         ):
     """Build slides in the given markdown file."""
-    export_to_html = not export_to_pdf
-
     resource_path = pathlib.Path(__file__).parent.absolute()
     target_path = pathlib.Path().absolute()
 
@@ -156,10 +157,16 @@ def build_slides(
     theme = THEME_TEMPLATE.format(theme)
     code_theme = CODE_THEME_TEMPLATE.format(code_theme)
 
+    # Copy and write needed files to the output directory
+    critical_paths: list[Path] = list()
+
     # Copy revealjs dir
     if not revealjs_dir.exists():
         shutil.copytree(revealjs_origin, revealjs_dir)
         shutil.copytree(math_origin, math_dir)
+        critical_paths.extend(
+                revealjs_dir/path for path in REVEALJS_CRITICAL_PATHS
+            )
 
     # Read html
     with open(index_file_original, "r") as f_p:
@@ -184,15 +191,25 @@ def build_slides(
     # Copy index file
     with open(index_file_new, "w") as f_p:
         f_p.write("".join(index_html))
+        critical_paths.append(index_file_new)
 
     # Copy include files
     for path in include_paths:
-        if path.is_dir:
-            shutil.copytree(
-                    path, revealjs_dir/path.parts[-1], dirs_exist_ok=True
-                )
+        target_path = revealjs_dir/path.parts[-1]
+        if path.is_dir():
+            shutil.copytree(path, target_path, dirs_exist_ok=True)
         else:
-            shutil.copy(path, revealjs_dir/path.parts[-1])
+            shutil.copy(path, target_path)
+        critical_paths.append(target_path)
+
+    # Remove unused reveal development files
+    print(critical_paths)
+    for path in revealjs_dir.glob("*"):
+        if path not in critical_paths:
+            if path.is_dir():
+                shutil.rmtree(path)
+            else:
+                path.unlink()
 
     # Export to PDF if needed
     if export_to_pdf:
@@ -200,12 +217,6 @@ def build_slides(
                 index_file_new, markdown_file.with_suffix('.pdf')
             )
         print("Wrote {}".format(markdown_file.with_suffix('.pdf')))
-
-    if export_to_html:
-        # Change output folder name
-        print("Done. Open {} with your web browser".format(
-                revealjs_dir/"index.html")
-              )
 
 
 def main():
