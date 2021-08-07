@@ -104,7 +104,7 @@ Markdown-slides works with Python 3.9 or newer.
 
 Here's a fearless, conflict-free python install that Just Works™ in bash, zsh, and fish:
 
-1. [Webi](https://webinistall.dev) will install `pyenv` (the python version manager) to `~/.pyenv`, where it won't conflict with your system python, or any projects:
+1. [Webi](https://webinstall.dev) will install `pyenv` (the python version manager) to `~/.pyenv`, where it won't conflict with your system python, or any projects:
    ```bash
    curl -sS https://webinstall.dev/pyenv | bash
    ```
