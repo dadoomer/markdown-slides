@@ -159,11 +159,12 @@ def build_slides(
     critical_paths: list[Path] = list()
 
     # Copy revealjs dir
-    if not revealjs_dir.exists():
-        shutil.copytree(revealjs_origin, revealjs_dir)
-        critical_paths.extend(
-                revealjs_dir/path for path in REVEALJS_CRITICAL_PATHS
-            )
+    if revealjs_dir.exists():
+        shutil.rmtree(revealjs_dir)
+    shutil.copytree(revealjs_origin, revealjs_dir)
+    critical_paths.extend(
+            revealjs_dir/path for path in REVEALJS_CRITICAL_PATHS
+        )
 
     # Read html
     with open(index_file_original, "r") as f_p:
