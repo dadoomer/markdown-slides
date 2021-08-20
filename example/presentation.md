@@ -167,3 +167,15 @@ Add tables:
 ----------
 
 Some other text.
+
+[comment]: # (!!!)
+
+You can also use in-line HTML.
+
+<div style="font-size: 1em;">
+small
+</div>
+
+<div style="font-size: 5em;">
+large
+</div>
