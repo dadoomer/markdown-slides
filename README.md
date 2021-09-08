@@ -1,8 +1,8 @@
 ![logo](logos/wide.png)
 
 **Using markdown, write simple but beautiful presentations with math,
-animations and media, which can be visualized in a web browser even without
-an internet connection, or exported to PDF.**
+animations and media, which can be visualized in a web browser or exported to
+PDF.**
 
 See the official [git repository hosted on Gitlab](https://gitlab.com/da_doomer/markdown-slides) or the [Github mirror](https://github.com/dadoomer/markdown-slides).
 
