@@ -155,7 +155,7 @@ def build_slides(
     presentation_str = "\n".join(presentation + [""])
     options_str = "\n".join([OPTIONS_WORD] + options + [""])
     theme = THEME_TEMPLATE.format(theme)
-    code_theme = CODE_THEME_TEMPLATE.format(code_theme_name)
+    code_theme = CODE_THEME_TEMPLATE.format(code_theme_name.split("/")[-1])
 
     # Copy and write needed files to the output directory
     critical_paths: List[Path] = list()
