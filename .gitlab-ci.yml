@@ -1,10 +1,9 @@
-image: alpine
+image: "python:3.8"
 
 pages:
   stage: deploy
   script:
-    - apk --no-cache add py3-pip python3-dev git
-    - pip3 install git+https://gitlab.com/da_doomer/markdown-slides.git
+    - pip install .
     - mdslides example/presentation.md --include example/media
     - mv presentation public
   artifacts:
@@ -12,3 +11,5 @@ pages:
       - public
   only:
     - master
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
