@@ -61,6 +61,7 @@ def build_slides(
     revealjs_dir = target_path/markdown_file.stem
     index_file_original = resource_path/"index_template.html"
     index_file_new = target_path/revealjs_dir/"index.html"
+    highlight_path = resource_path/"highlight.js"/"src"/"styles"
 
     # Open markdown file
     with open(markdown_file) as f_p:
@@ -73,7 +74,7 @@ def build_slides(
     options = ["{} : {},".format(key, val)
                for key, val in DEFAULT_OPTIONS.items()]
     theme = DEFAULT_THEME
-    code_theme = DEFAULT_CODE_THEME
+    code_theme_name = DEFAULT_CODE_THEME
     attributes = DEFAULT_ATTRIBUTES
     title = None
     for line in presentation_markdown:
@@ -123,7 +124,7 @@ def build_slides(
         # Is the line setting a code theme?
         match = code_theme_re.match(line)
         if match is not None:
-            code_theme = match.group(1)
+            code_theme_name = match.group(1)
             continue
 
         # Is the line the first heading?
@@ -153,7 +154,7 @@ def build_slides(
     presentation_str = "\n".join(presentation + [""])
     options_str = "\n".join([OPTIONS_WORD] + options + [""])
     theme = THEME_TEMPLATE.format(theme)
-    code_theme = CODE_THEME_TEMPLATE.format(code_theme)
+    code_theme = CODE_THEME_TEMPLATE.format(code_theme_name)
 
     # Copy and write needed files to the output directory
     critical_paths: list[Path] = list()
@@ -207,6 +208,10 @@ def build_slides(
                 shutil.rmtree(path)
             else:
                 path.unlink()
+
+    # Copy selected highlight style
+    highlight_css = (highlight_path/code_theme_name).with_suffix(".css")
+    shutil.copy(highlight_css, revealjs_dir/"plugin"/"highlight")
 
     # Export to PDF if needed
     if export_to_pdf:
