@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse
 import shutil
 import re
+from typing import List
 from .pdf import export as pdf_export
 
 DATA_WORD = "DATA"
@@ -50,7 +51,7 @@ REVEALJS_CRITICAL_PATHS = ["dist", "plugin", "LICENSE"]
 
 def build_slides(
         markdown_file: Path,
-        include_paths: list[Path],
+        include_paths: List[Path],
         export_to_pdf: Path,
         ):
     """Build slides in the given markdown file."""
@@ -69,8 +70,8 @@ def build_slides(
 
     # Build presentation
     presentation = list()
-    slide: list[str] = list()
-    vertical_slide: list[str] = list()
+    slide: List[str] = list()
+    vertical_slide: List[str] = list()
     options = ["{} : {},".format(key, val)
                for key, val in DEFAULT_OPTIONS.items()]
     theme = DEFAULT_THEME
@@ -157,7 +158,7 @@ def build_slides(
     code_theme = CODE_THEME_TEMPLATE.format(code_theme_name)
 
     # Copy and write needed files to the output directory
-    critical_paths: list[Path] = list()
+    critical_paths: List[Path] = list()
 
     # Copy revealjs dir
     if revealjs_dir.exists():

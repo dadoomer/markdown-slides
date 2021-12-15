@@ -21,7 +21,7 @@ completely avoiding the need to edit HTML files directly.
 python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git
 ```
 
-mardown-slides works with Python >= 3.9.
+Markdown-slides works with Python >= 3.8.
 
 Don't have python? Your version of python not working? Scroll down to [fearless, conflict-free Python installation](#fearless-conflict-free-python-installation).
 
