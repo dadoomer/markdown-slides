@@ -17,7 +17,7 @@ TITLE_TEMPLATE = "<title>{}</title>"
 SECTION_TEMPLATE = "<section data-markdown {}><textarea data-template>\n{}\n</textarea></section>"
 VERTICAL_SECTION_TEMPLATE = "<section>\n{}\n</section>"
 THEME_TEMPLATE = '<link rel="stylesheet" href="dist/theme/{}.css" id="theme">'
-CODE_THEME_TEMPLATE = '<link rel="stylesheet" href="plugin/highlight/{}.css" id="highlight-theme">'
+CODE_THEME_TEMPLATE = '<link rel="stylesheet" href="plugin/highlight/{}.min.css" id="highlight-theme">'
 
 # Read both comment formats (first one is CommonMark compliant, second one
 # is common format).
@@ -62,7 +62,7 @@ def build_slides(
     revealjs_dir = target_path/markdown_file.stem
     index_file_original = resource_path/"index_template.html"
     index_file_new = target_path/revealjs_dir/"index.html"
-    highlight_path = resource_path/"highlight.js"/"src"/"styles"
+    highlight_path = resource_path/"cdn-release"/"build"/"styles"
 
     # Open markdown file
     with open(markdown_file) as f_p:
@@ -211,7 +211,7 @@ def build_slides(
                 path.unlink()
 
     # Copy selected highlight style
-    highlight_css = (highlight_path/code_theme_name).with_suffix(".css")
+    highlight_css = (highlight_path/code_theme_name).with_suffix(".min.css")
     shutil.copy(highlight_css, revealjs_dir/"plugin"/"highlight")
 
     # Export to PDF if needed

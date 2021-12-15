@@ -1,6 +1,6 @@
 [submodule "mdslides/reveal.js"]
 	path = mdslides/reveal.js
 	url = https://github.com/hakimel/reveal.js.git
-[submodule "mdslides/highlight.js"]
-	path = mdslides/highlight.js
-	url = https://github.com/highlightjs/highlight.js.git
+[submodule "mdslides/cdn-release"]
+	path = mdslides/cdn-release
+	url = https://github.com/highlightjs/cdn-release.git
