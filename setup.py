@@ -5,10 +5,10 @@ import glob
 from pathlib import Path
 
 revealjsdata = glob.glob("mdslides/reveal.js/**", recursive=True)
-hightlightjsdata = glob.glob("mdslides/cdn-release/**", recursive=True)
+highlightjsdata = glob.glob("mdslides/cdn-release/**", recursive=True)
 katexdata = glob.glob("mdslides/KaTeX/**", recursive=True)
 
-mdslidesdata = revealjsdata + katexdata + ["mdslides/index_template.html"]
+mdslidesdata = revealjsdata + katexdata + highlightjsdata + ["mdslides/index_template.html"]
 mdslidesdata = [str(Path(p).relative_to("mdslides")) for p in mdslidesdata]
 
 setup(name='MarkdownSlides',
