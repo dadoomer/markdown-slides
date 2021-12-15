@@ -5,7 +5,7 @@ import glob
 from pathlib import Path
 
 revealjsdata = glob.glob("mdslides/reveal.js/**", recursive=True)
-
+hightlightjsdata = glob.glob("mdslides/cdn-release/**", recursive=True)
 katexdata = glob.glob("mdslides/KaTeX/**", recursive=True)
 
 mdslidesdata = revealjsdata + katexdata + ["mdslides/index_template.html"]
