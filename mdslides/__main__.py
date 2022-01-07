@@ -39,7 +39,7 @@ title_re = re.compile(TITLE_RE_PATTERN)
 
 DEFAULT_ATTRIBUTES = ""
 DEFAULT_THEME = "white"
-DEFAULT_CODE_THEME = "zenburn"
+DEFAULT_CODE_THEME = "base16/zenburn"
 DEFAULT_OPTIONS = {
         "controls": "false",
         "markdown": "{smartypants: true}",
