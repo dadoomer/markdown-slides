@@ -4,6 +4,7 @@ pages:
   stage: deploy
   script:
     - pip install .
+    - mdslides example/simple.md
     - mdslides example/presentation.md --include example/media
     - mv presentation public
   artifacts:
