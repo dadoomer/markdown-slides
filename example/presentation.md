@@ -147,6 +147,8 @@ Press down on your keyboard or swipe down.
 
 **Vertical slides!**
 
+(thanks [@porvik!](https://gitlab.com/da_doomer/markdown-slides/-/issues/8))
+
 [comment]: # (|||)
 
 As many vertical slides as you like.
