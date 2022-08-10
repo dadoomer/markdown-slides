@@ -99,6 +99,8 @@ Keep in mind you need an Internet connection to render equations (see [issue #9]
 
 If you encounter any issues or have some questions, open an [issue on Gitlab](https://gitlab.com/da_doomer/markdown-slides/-/issues) or [on Github](https://github.com/dadoomer/markdown-slides/issues).
 
+Comments and pull requests are very welcome!
+
 ## Fearless, Conflict-free Python installation
 
 Markdown-slides works with Python 3.9 or newer.
