@@ -13,7 +13,7 @@ mdslidesdata = [str(Path(p).relative_to("mdslides")) for p in mdslidesdata]
 
 setup(name='MarkdownSlides',
       python_requires='>=3.8',
-      version='1.4',
+      version='1.5',
       description='Write modern slides with markdown.',
       packages=['mdslides'],
       entry_points={'console_scripts': ['mdslides=mdslides.__main__:main']},

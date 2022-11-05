@@ -5,6 +5,7 @@ import argparse
 import shutil
 import re
 from typing import List
+from typing import Union
 from .pdf import export as pdf_export
 
 DATA_WORD = "DATA"
@@ -53,15 +54,15 @@ def build_slides(
         markdown_file: Path,
         include_paths: List[Path],
         export_to_pdf: Path,
+        target_path: Path,
         ):
     """Build slides in the given markdown file."""
+    revealjs_dir = target_path
     resource_path = pathlib.Path(__file__).parent.absolute()
-    target_path = pathlib.Path().absolute()
 
     revealjs_origin = resource_path/"reveal.js"
-    revealjs_dir = target_path/markdown_file.stem
     index_file_original = resource_path/"index_template.html"
-    index_file_new = target_path/revealjs_dir/"index.html"
+    index_file_new = revealjs_dir/"index.html"
     highlight_path = resource_path/"cdn-release"/"build"/"styles"
 
     # Open markdown file
@@ -195,12 +196,12 @@ def build_slides(
 
     # Copy include files
     for path in include_paths:
-        target_path = revealjs_dir/path.parts[-1]
+        include_target_path = revealjs_dir/path.parts[-1]
         if path.is_dir():
-            shutil.copytree(path, target_path, dirs_exist_ok=True)
+            shutil.copytree(path, include_target_path, dirs_exist_ok=True)
         else:
-            shutil.copy(path, target_path)
-        critical_paths.append(target_path)
+            shutil.copy(path, include_target_path)
+        critical_paths.append(include_target_path)
 
     # Remove unused reveal development files
     for path in revealjs_dir.glob("*"):
@@ -245,11 +246,26 @@ def main():
             help="Export a pdf file (requires chromium installed).",
             action="store_true"
         )
+    parser.add_argument(
+            '--output_dir',
+            metavar="OUTPUT_DIR",
+            help="Output directory. "
+            "Defaults to a directory with the same name as the input "
+            "markdown file with no suffix, created in the working directory.",
+            type=Path,
+            default=None,
+        )
     args = parser.parse_args()
+    markdown_file = args.FILE
+    if args.output_dir is None:
+        target_path = pathlib.Path().absolute()/markdown_file.stem
+    else:
+        target_path = Path(args.output_dir).absolute()
     build_slides(
             export_to_pdf=args.pdf,
-            markdown_file=args.FILE,
+            markdown_file=markdown_file,
             include_paths=[Path(p) for p in args.include],
+            target_path=target_path,
         )
 
 
