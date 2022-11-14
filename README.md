@@ -28,7 +28,7 @@ Don't have python? Your version of python not working? Scroll down to [fearless,
 # Usage
 
 ```bash
-mdslides [-h] [--include RESOURCE] [--pdf] FILE
+mdslides [-h] [--include RESOURCE] [--pdf] [--output_dir DIR] FILE
 ```
 
 where
