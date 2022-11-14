@@ -37,6 +37,8 @@ where
 
 - `FILE`: input markdown file.
 
+- `DIR`: output directory. Defaults to a new directory in the working directory with the same name as the input file, but without suffix.
+
 Notes:
 
  - PDF exporting requires chromium (see [PDF exporting on
