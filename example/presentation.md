@@ -62,8 +62,15 @@ Notice the background color change.
 Use background videos, background pictures and **text formatting**,
 everything *without breaking* your markdown files.
 
-[comment]: # (!!! data-background-video="media/video.mp4", data-background-video-loop data-background-video-muted data-background-opacity="0.2")
 [comment]: # (Other background options: https://revealjs.com/backgrounds/)
+[comment]: # (!!! data-background-video="media/video.mp4", data-background-video-loop data-background-video-muted data-background-opacity="0.2")
+
+Even speaker notes, accessed through the `S` key on your keyboard.
+
+Note:
+This will only appear in the speaker view! 🤯
+
+[comment]: # (!!!)
 
 ## Pictures
 
