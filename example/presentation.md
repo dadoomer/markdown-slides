@@ -68,6 +68,8 @@ everything *without breaking* your markdown files.
 
 Even speaker notes, accessed through the `S` key on your keyboard.
 
+(You may have to allow pop-up windows and try again.)
+
 Note:
 This will only appear in the speaker view! 🤯
 
