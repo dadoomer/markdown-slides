@@ -24,7 +24,8 @@ CODE_THEME_TEMPLATE = '<link rel="stylesheet" href="plugin/highlight/{}.min.css"
 # is common format).
 # [comment]: (stuff)
 # [comment]: "stuff"
-RE_TEMPLATE = r"\[comment\]: # [(\"]{0}[)\"]"
+# [comment]: 'stuff'
+RE_TEMPLATE = r"\[comment\]: # [(\"\']{0}[)\"\']"
 OPTION_RE_PATTERN = r"[ ]*(\S+)[ ]*:[ ]*(\S+)[ ]*"
 DELIMITER_RE_PATTERN = r"\!\!\![ ]*(.*)"
 VERTICAL_DELIMITER_RE_PATTERN = r"\|\|\|[ ]*(.*)"

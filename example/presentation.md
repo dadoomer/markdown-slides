@@ -10,6 +10,7 @@
 [comment]: # (The list of code themes is at https://highlightjs.org/)
 
 [comment]: # "You can also use quotes instead of parenthesis"
+[comment]: # 'Single quotes work too'
 [comment]: # "THEME = white"
 
 [comment]: # (Pass optional settings to reveal.js:)

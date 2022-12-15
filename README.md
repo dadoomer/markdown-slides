@@ -28,7 +28,7 @@ Don't have python? Your version of python not working? Scroll down to [fearless,
 # Usage
 
 ```bash
-mdslides [-h] [--include RESOURCE] [--pdf] FILE
+mdslides [-h] [--include RESOURCE] [--pdf] [--output_dir DIR] FILE
 ```
 
 where
@@ -36,6 +36,8 @@ where
 - `RESOURCE`: any file or directory that should be included (e.g. a directory with pictures and videos)
 
 - `FILE`: input markdown file.
+
+- `DIR`: output directory. Defaults to a new directory in the working directory with the same name as the input file, but without suffix.
 
 Notes:
 
